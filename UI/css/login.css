@@ -277,5 +277,21 @@ span {
         transform: translate(-50%, -50%);
         text-align: center;
     }
+    .login__button {
+    width: 68%;
+    display: inline-block;
+    padding: 0.6rem 2.7rem;
+    margin-top: 2.7rem;
+    border: none;
+    border-radius: 3px;
+    background-color: #FFA400;
+    color: white;
+    box-shadow: 0 0.1rem 0.2rem rgba(0, 0, 0, 0.1);
+    transform: translateY(-1.5px);
+    transition: all 0.2s ease;
+    font-size: 1.1rem;
+    text-transform: capitalize;
+}
+
 
 }
