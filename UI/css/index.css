@@ -407,17 +407,17 @@ body {
 
     .btn-user{
         position: absolute;
-        bottom: 21%;
+        bottom: 15%;
         left: 50%;
         transform: translateX(-50%) translateY(-5rem);
         background-color: #FFA400;
     }
     .btn-admin{
         position: absolute;
-        top: 82%;
+        top: 88%;
         left: 50%;
         transform: translateX(-50%) translateY(-5rem);
-        width: 38%;
+        width: 45%;
     }
     
     .icon{
