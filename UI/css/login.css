@@ -22,7 +22,7 @@ body {
 .login__background {
     width: 100%;
     height: 100%;
-    background-image: linear-gradient(to right bottom, rgba(0, 0, 0, 0.9), rgb(36, 37, 42, 0.9)), url("../img/background-1.jpg");
+    background-image: linear-gradient(to right bottom, rgba(0, 0, 0, 0.9), rgb(36, 37, 42, 0.9)), url("../UI/img/background-1.jpg");
     /* alt pexel 842 or 482 */
     background-repeat: no-repeat;
     background-size: cover;
