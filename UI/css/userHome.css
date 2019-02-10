@@ -85,7 +85,7 @@ body {
     margin: 0 2rem;
     border-radius: 5px;
     overflow: hidden;
-    background-image: url("img/burger.jpg");
+    background-image: url("/img/burger.jpg");
     background-size: cover;
     background-position: center;
     filter: brightness(0.9);
@@ -256,7 +256,7 @@ body {
     display: inline-block;
     border-radius: 8px;
     box-shadow: rgba(0, 0, 0, 0.2) 1px 1px 5px;
-    background-image: url("img/burger.jpg");
+    background-image: url("/img/burger.jpg");
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -661,7 +661,7 @@ input[type="number"] {
         display: inline-block;
         border-radius: 8px;
         box-shadow: rgba(0, 0, 0, 0.2) 1px 1px 5px;
-        background-image: url("img/burger.jpg");
+        background-image: url("/img/burger.jpg");
         background-position: center;
         /* background-origin: border-box; */
         background-size: cover;
