@@ -436,6 +436,7 @@ body {
     .directional-icons{
         top: 50%;
         width: 100%;
+        left: 50%;
     }
 
     .joiner{
