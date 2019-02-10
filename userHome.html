@@ -1,0 +1,203 @@
+<!-- remeber to add toggle options in signin and sign up gaes  caterer or hungry person -->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Abril+Fatface|Sarabun:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+        crossorigin="anonymous">
+    <link rel="shortcut icon" href="/img/favicon (2).ico" type="image/x-icon">
+    <link rel="icon" href="/img/favicon (2).ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css?family=Courgette" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/userHome.css" />
+</head>
+
+<body>
+    <!-- sematic ui style nav -->
+
+    <!-- <nav>
+        <li class="navItem">
+            <a href="" class="navlink">Menu</a>
+            <a href="" class="navlink">History</a>
+            <a href="" class="navlink">Explore</a>
+         </li>
+    </nav> -->
+
+    <!-- all i am creating for now are the bare basics of the app now -->
+
+    <!-- menu of the day heading , meal item card, the selected meal item pop-up <visit flat-icon for info on that> , the checkout page  >  -->
+
+    <div class="checkout-page">
+        <div class="checkout-page-detail">
+            <div class="item-list-holder">
+                <div class="item-list">
+                    <div class="checkout-item">
+                        <div class="delete-checkout-item">
+                            <i class="fas fa-times fa-2x"></i>
+                        </div>
+                        <div class="checkout-image">
+                            <img src="/img/burger.jpg" alt="">
+                        </div>
+                        <div class="checkout-text">
+                            <h2 class="checkout-name">Double Deck Burger</h2>
+                            <p class="checkout-quantity">Quantity : 1</p>
+                            <h3 class="tag tag-checkout"> Price : <span class="price">
+                                    &dollar; 10.99
+                                </span>
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="checkout-item">
+                        <div class="delete-checkout-item">
+                            <i class="fas fa-times fa-2x"></i>
+                        </div>
+                        <div class="checkout-image">
+                            <img src="/img/burger.jpg" alt="">
+                        </div>
+                        <div class="checkout-text">
+                            <h2 class="checkout-name">Double Deck Burger</h2>
+                            <p class="checkout-quantity">Quantity : 2</p>
+                            <h3 class="tag tag-checkout"> Price : <span class="price">
+                                    &dollar; 10.99
+                                </span>
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="checkout-item">
+                        <div class="delete-checkout-item">
+                            <i class="fas fa-times fa-2x"></i>
+                        </div>
+                        <div class="checkout-image">
+                            <img src="/img/burger.jpg" alt="">
+                        </div>
+                        <div class="checkout-text">
+                            <h2 class="checkout-name">Double Deck Burger</h2>
+                            <p class="checkout-quantity">Quantity : 3</p>
+                            <h3 class="tag tag-checkout"> Price : <span class="price">
+                                    &dollar; 10.99
+                                </span>
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+                <button class="checkout-button">
+                    checkout
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="show-card">
+        <div class="close"> <i class="fas fa-times fa-2x"></i> </div>
+        <div class="card-expanded">
+            <div class="card-top">
+                <!-- note when its time to join the backend to the ui -->
+                <!-- for the number of images added to this mea option create an equa number of image containers and set thier backgrounds to the images -->
+                <!-- create equal number of scroll dots and implenent image slide idea -->
+                <div class="image-container">
+                </div>
+                <div class="scroll-dot-container">
+                    <div class="dot">
+                    </div>
+                </div>
+            </div>
+            <div class="card-bottom">
+                <div class="meal-details">
+                    <h2 class="food-name-black">Double Deck burger </h2>
+                    <h3 class="tag"> Price : <span class="price">
+                            &dollar; 10.99
+                        </span></h3>
+                    <h3 class="tag"> Calories : <span class="cal">
+                            108KCal
+                        </span>
+                    </h3>
+                </div>
+                <div class="num-items">
+                    <div class="item minus"> - </div>
+                    <div class="item text-num">
+                        <input type="number" value="1" id="targetInput">
+                    </div>
+                    <div class="item plus"> + </div>
+                </div>
+                <button class="submit">
+                    Add to cart
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+            <div class="logo"> 
+                    <img src="/img/logo-3-black.png" alt="logo">
+                    <h2>book-a-meal</h2>
+            </div>
+        <div class="lead">
+            <h2 class="lead-heading">
+                Today's Menu
+                <!-- give it the special font type-->
+            </h2>
+        </div>
+        <div class="main">
+            <div class="cardlist">
+                <!--prolly make it flexbox ish or use flexbox grids-->
+                <div class="card">
+                    <!--has a background image-->
+                    <div class="text">
+                        <h2 class="food-name">Double Deck burger </h2> <!-- use special font -->
+                        <p class="caption-text"> Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nemo modi
+                            doloremque reiciendis. </p>
+                    </div>
+                    <div class="text-cover"></div>
+                </div>
+                <div class="card">
+                    <!--has a background image-->
+                    <div class="text">
+                        <h2 class="food-name">Double Deck burger </h2> <!-- use special font -->
+                        <p class="caption-text"> Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nemo modi
+                            doloremque reiciendis. </p>
+                    </div>
+                    <div class="text-cover"></div>
+                </div>
+                <div class="card">
+                    <!--has a background image-->
+                    <div class="text">
+                        <h2 class="food-name">Double Deck burger </h2> <!-- use special font -->
+                        <p class="caption-text"> Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nemo modi
+                            doloremque reiciendis. </p>
+
+                    </div>
+                    <div class="text-cover"></div>
+                </div>
+                <div class="card">
+                    <!--has a background image-->
+                    <div class="text">
+                        <h2 class="food-name">Double Deck burger </h2> <!-- use special font -->
+                        <p class="caption-text"> Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nemo modi
+                            doloremque reiciendis. </p>
+
+                    </div>
+                    <div class="text-cover"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="checkout">
+        </div>
+        <div class="cart-icon">
+            <i class="fas fa-minus fa-2x"></i>
+            <img src="/img/shopping-cart.png" alt="cart-icon">
+            <!-- a second bar icon from font awesome -->
+        </div>
+    </div>
+
+
+
+    <script src="/js/userHome.js"></script>
+</body>
+
+</html>
