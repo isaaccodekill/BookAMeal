@@ -27,7 +27,7 @@ body {
     position: absolute;
     top: 0;
     left: 0;
-    background-image: linear-gradient(to right bottom, rgba(255, 165, 0, 0.7), rgba(242, 38, 19, 0.7)), url("./img/pexels-photo-842571.jpeg");
+    background-image: linear-gradient(to right bottom, rgba(255, 165, 0, 0.7), rgba(242, 38, 19, 0.7)), url("../img/pexels-photo-842571.jpeg");
     background-size: cover;
     background-position: center;
 }
@@ -53,7 +53,7 @@ body {
 
 .signUp-left {
     width: 50%;
-    background-image: url("./img/pexels-photo-842571.jpeg");
+    background-image: url("../img/pexels-photo-842571.jpeg");
     height: 100%;
     background-size: cover;
     background-position: center;
