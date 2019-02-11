@@ -406,12 +406,12 @@ a.login-link {
         left: 50%;
         transform: translateX(-50%);
         width: 11rem;
-        bottom: 2rem;
+        bottom: 5rem;
     }
 
     
     button.signUp-button {
-        margin-top: 1.7rem;
+        margin-top: 3.7rem;
         float: none;
     }
     
@@ -425,4 +425,16 @@ a.login-link {
     background-color: transparent;
     color: #2D3436;
 }
+}
+
+@media (max-height:711px){
+    button.signUp-button {
+        margin-top: 1.7rem;
+        float: none;
+    }
+    a.signUp__button-google2{
+        bottom: 2rem;
+    }
+
+
 }
