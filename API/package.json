@@ -1,0 +1,22 @@
+{
+  "name": "book_a_meal",
+  "version": "1.0.0",
+  "description": "The backend services for the book a meal app",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/isaaccodekill/BookAMeal.git"
+  },
+  "author": "Isaac Bello",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/isaaccodekill/BookAMeal/issues"
+  },
+  "homepage": "https://github.com/isaaccodekill/BookAMeal#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
