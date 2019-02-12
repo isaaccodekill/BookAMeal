@@ -20,6 +20,7 @@ submit.addEventListener("click", function(){
     newCheckout.style.display = "block";
     delivery.style.color = "white";
     delivery.style.backgroundColor = "#08090a";
+    innerShrink.style.display = "none";
 })
 
 
