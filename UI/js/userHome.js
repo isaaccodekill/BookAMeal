@@ -6,16 +6,20 @@ const input = document.querySelector("#targetInput")
 const plus = document.querySelector(".plus")
 const minus = document.querySelector(".minus")
 const cardlist = document.querySelector(".cardlist")
+<<<<<<< HEAD
 const submit = document.querySelector(".check-submit")
 const newCheckout = document.querySelector(".checkout-page-new")
 const delivery = document.querySelector(".delivery")
 const deliverybody = document.querySelector('.delivery-form-content')
 const carryout = document.querySelector(".carryout")
 const carryoutBody = document.querySelector(".carryout-content")
+=======
+>>>>>>> 31f1b05cad5cc4a655e013958260997416e12111
 
 let cards = Array.from(card)
 
 
+<<<<<<< HEAD
 submit.addEventListener("click", function(){
     newCheckout.style.display = "block";
     delivery.style.color = "white";
@@ -42,6 +46,8 @@ carryout.addEventListener("click", function () {
 })
 
 
+=======
+>>>>>>> 31f1b05cad5cc4a655e013958260997416e12111
 // note add an invible overlay to each card and target it.
 
 cardlist.addEventListener("click", function (e) {
@@ -79,6 +85,7 @@ plus.addEventListener("click", () => {
 
 // handling checkout
 
+<<<<<<< HEAD
 // const checkoutButton = document.querySelector(".cart-icon")
 // const scaleUp = document.querySelector(".checkout")
 // const checkoutPage = document.querySelector(".checkout-page")
@@ -106,3 +113,32 @@ plus.addEventListener("click", () => {
 //         e.target.parentElement.parentElement.remove()
 //     }
 // })
+=======
+const checkoutButton = document.querySelector(".cart-icon")
+const scaleUp = document.querySelector(".checkout")
+const checkoutPage = document.querySelector(".checkout-page")
+const checkoutList = document.querySelector(".item-list") // target = 
+const checkoutRealPage = document.querySelector(".item-list-holder");
+const body = document.querySelector("body")
+
+checkoutButton.addEventListener("click", function () {
+    let image = this.lastElementChild
+    let icon = this.firstElementChild
+    image.classList.toggle("imghide")
+    icon.classList.toggle("iconShow")
+    checkoutRealPage.classList.toggle("checkout-display")
+    this.classList.toggle("changeColor")
+    scaleUp.classList.toggle("growCheckout")
+    checkoutPage.classList.toggle("showCheckpage")
+    body.classList.toggle("removeScroll")
+
+})
+
+
+
+checkoutList.addEventListener("click", function (e) {
+    if (e.target.matches("i")) {
+        e.target.parentElement.parentElement.remove()
+    }
+})
+>>>>>>> 31f1b05cad5cc4a655e013958260997416e12111
