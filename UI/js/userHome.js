@@ -78,32 +78,3 @@ plus.addEventListener("click", () => {
 })
 
 
-// handling checkout
-
-// const checkoutButton = document.querySelector(".cart-icon")
-// const scaleUp = document.querySelector(".checkout")
-// const checkoutPage = document.querySelector(".checkout-page")
-// const checkoutList = document.querySelector(".item-list") // target = 
-// const checkoutRealPage = document.querySelector(".item-list-holder");
-// const body = document.querySelector("body")
-
-// checkoutButton.addEventListener("click", function () {
-//     let image = this.lastElementChild
-//     let icon = this.firstElementChild
-//     image.classList.toggle("imghide")
-//     icon.classList.toggle("iconShow")
-//     checkoutRealPage.classList.toggle("checkout-display")
-//     this.classList.toggle("changeColor")
-//     scaleUp.classList.toggle("growCheckout")
-//     checkoutPage.classList.toggle("showCheckpage")
-//     body.classList.toggle("removeScroll")
-
-// })
-
-
-
-// checkoutList.addEventListener("click", function (e) {
-//     if (e.target.matches("i")) {
-//         e.target.parentElement.parentElement.remove()
-//     }
-// })
