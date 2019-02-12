@@ -177,7 +177,7 @@ a.signUp__button-google:hover {
     margin-top: 2rem;
     margin-bottom: 0.5rem;
     /* margin-left: 1rem; */
-    background-image: linear-gradient(to right bottom, rgb(0, 0, 0), rgba(45, 52, 54));
+    background-image: linear-gradient(to right bottom, rgba(0, 0, 0, 1), rgba(45, 52, 54, 1));
     background-size: 200%;
     background-position: center;
     color: transparent;
