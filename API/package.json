@@ -4,9 +4,10 @@
   "description": "An app to book a meal",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon --exec babel-node app.js"
   },
-  "repository": {
+  "repository": { 
     "type": "git",
     "url": "git+https://github.com/isaaccodekill/BookAMeal.git"
   },
@@ -20,8 +21,12 @@
     "express": "^4.16.4"
   },
   "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "@babel/node": "^7.2.2",
+    "@babel/preset-env": "^7.3.1",
     "eslint": "^5.13.0",
     "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.16.0"
+    "eslint-plugin-import": "^2.16.0",
+    "nodemon": "^1.18.10"
   }
 }
