@@ -1,3 +1,6 @@
+[![Coverage Status](https://coveralls.io/repos/github/isaaccodekill/BookAMeal/badge.svg?branch=develop)](https://coveralls.io/github/isaaccodekill/BookAMeal?branch=develop)
+
+
 # Book-a-meal-App
 A web app made for ordering meals with the following features
 1. User can create an account and sign in
