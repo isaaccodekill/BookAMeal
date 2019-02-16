@@ -1,7 +1,6 @@
 [![Coverage Status](https://coveralls.io/repos/github/isaaccodekill/BookAMeal/badge.svg?branch=develop)](https://coveralls.io/github/isaaccodekill/BookAMeal?branch=develop)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/e46d7403dec00b237322/test_coverage)](https://codeclimate.com/github/isaaccodekill/BookAMeal/test_coverage)
 
-
-[![Test Coverage](https://api.codeclimate.com/v1/badges/a99a88d28ad37a79dbf6/test_coverage)](https://codeclimate.com/github/codeclimate/codeclimate/test_coverage)
 
 # Book-a-meal-App
 A web app made for ordering meals with the following features
