@@ -4,8 +4,13 @@
   "description": "An app to book a meal",
   "main": "app.js",
   "scripts": {
-    "test": "nodemon --exec mocha --compilers js:@babel/register",
-    "start": "nodemon --exec babel-node app.js"
+    "test": "nyc --require @babel/register mocha --compilers js:@babel/register",
+    "start": "nodemon --exec babel-node app.js",
+    "generate-lcov": "nyc report --reporter=text-lcov > lcov.info",
+    "coveralls-coverage": "coveralls < lcov.info",
+    "codeclimate-coverage": "codeclimate-test-reporter < lcov.info",
+    "coverage": "nyc npm test && npm run coveralls-coverage && npm run codeclimate-coverage"
+
   },
   "repository": {
     "type": "git",

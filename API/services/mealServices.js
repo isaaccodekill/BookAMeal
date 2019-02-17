@@ -44,7 +44,6 @@ class mealServices {
     updatedMealItem.description = body.description;
     const index = this.meals.findIndex(x => x.id === foundmealItem.id);
     this.meals[index] = updatedMealItem;
-    console.log(updatedMealItem);
     return { message: 'Meal item updated', updatedMealItem };
   }
 
