@@ -17,6 +17,7 @@ body {
     position: absolute;
     height: 100%;
     width: 100%;
+    /* padding: 1rem; */
 }
 
 .content {
@@ -209,7 +210,7 @@ body {
 
 .card {
     height: 19rem;
-    width: 17rem;
+    width: 20rem;
     /* background-color: green; */
     margin: 0 0.5rem;
     border-radius: 5px;
@@ -219,7 +220,7 @@ body {
     background-position: center;
     filter: brightness(0.9);
     display: inline-block;
-    margin: 2rem;
+    margin: 1.1rem;
     transition: all 0.3s ease;
     cursor: pointer;
     box-shadow: rgba(0, 0, 0, 0.3) 1px 1px 5px;
@@ -282,7 +283,7 @@ body {
 
 
 .food-name {
-    font-size: 1.5rem;
+    font-size: 1.9rem;
     position: relative;
     color: #fff;
 
@@ -320,8 +321,8 @@ body {
     height: 90%;
     width: 70%;
     background-color: #fff;
-    box-shadow: rgba(0, 0, 0, 0.2) 1px 1px 5px;
-    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.25);
+    border-radius: 4px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -415,7 +416,7 @@ body {
     padding: 0.7rem 3rem;
     color: #fff;
     position: absolute;
-    right: 0;
+    right: 4rem;
     text-transform: capitalize;
     border-radius: 5px;
     cursor: pointer;
@@ -599,7 +600,13 @@ body {
         padding: 3rem 3rem;
         display: inline-block;
         margin-bottom: 2rem;
+    }
+    .card-top{
+        height: 55%;
     }   
+    .image-container{
+        width: 50%;
+    }
 }
 
 
@@ -714,7 +721,7 @@ body {
         margin-top: -2rem;
     }
     .food-name-black{
-        font-size: 1.5rem;
+        font-size: 1.7rem;
     }
     .tag{
         font-size: 1.1rem;
@@ -738,5 +745,37 @@ body {
         display: inline-block;
         margin-bottom: 2rem;
     }   
+    .logo{
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    .edit{
+        right: 0;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    .delete{
+        right: 0;
+        left: 50%;
+        transform: translateX(-50%);
+    }
 
+}
+
+@media (max-height: 765px){
+    .card-expanded{
+        padding: 0;
+    }
+    .card-top{
+        padding-top: 1.1rem;
+    }
+    .image-container{
+        height: 100%;
+    }
+    .card-bottom{
+        position: absolute;
+        height: 35%;
+        bottom: 0;
+        width: 100%;
+    }
 }
