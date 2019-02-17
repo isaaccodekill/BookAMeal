@@ -59,16 +59,19 @@ body {
     padding: 3rem 13rem;
     display: inline-block;
     margin-bottom: 2rem;
+    text-align: center;
 }
 
 .listItem{
-    width: 100%;
+    width: 70%;
     padding: 2rem;
     border-radius: 3px;
     box-shadow: 0.15rem 0.5rem 0.8rem rgba(0, 0, 0, 0.2);
     border: 2px solid #FFA400;
     margin-bottom: 2rem;
     position: relative;
+    display: inline-block;
+    text-align: initial;
 }
 
 .checkbox{
@@ -112,7 +115,7 @@ body {
     .listbody{
         position: relative;
         width: 100%;
-        padding: 3rem 3rem;
+        padding: 3rem 2rem;
         display: inline-block;
         margin-bottom: 2rem;
     }   
@@ -121,5 +124,19 @@ body {
         align-self: center;
         /* left: 50%; */
         right: 2rem;
+    }
+    .food-name{
+        font-size: 1.3rem;
+        text-transform: capitalize;
+        font-family: 'Courgette', cursive;
+    }
+    .listItem{
+        width: 100%;
+        padding: 1rem;
+        border-radius: 3px;
+        box-shadow: 0.15rem 0.5rem 0.8rem rgba(0, 0, 0, 0.2);
+        border: 2px solid #FFA400;
+        margin-bottom: 2rem;
+        position: relative;
     }
 }
