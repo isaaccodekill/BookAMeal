@@ -4,5 +4,7 @@ node_js:
 services:
  - postgresql
 env:
- global
- - 
+ global:
+ - CODE_CLIMATE_REPO_TOKEN=93ee80987ff11b9caae9d3c0be6324883c7a4a6c
+after_success:
+  -npm run coverage
