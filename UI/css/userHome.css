@@ -36,7 +36,7 @@ body {
 }
 
 .logo img{
-    height: 90%;
+    height: 97%;
     margin-right: 1rem;
     display: inline-block;
 }
@@ -84,7 +84,7 @@ body {
     width: 20rem;
     /* background-color: green; */
     margin: 0 2rem;
-    border-radius: 5px;
+    border-radius: 4px;
     overflow: hidden;
     background-image: url("../img/burger.jpg");
     background-size: cover;
@@ -94,7 +94,7 @@ body {
     margin: 1.5rem;
     transition: all 0.3s ease;
     cursor: pointer;
-    box-shadow: rgba(0, 0, 0, 0.3) 1px 1px 5px;
+    box-shadow: 0 0.3rem 1rem rgba(0,0,0,0.25);
     text-align: left;
 }
 
@@ -131,7 +131,7 @@ body {
 
 
 .food-name {
-    font-size: 2rem;
+    font-size: 1.9rem;
     position: relative;
     color: #fff;
 
@@ -151,21 +151,7 @@ body {
 }
 
 
-.cart-icon {
-    position: fixed;
-    bottom: 4rem;
-    right: 5rem;
-    height: 4rem;
-    width: 4rem;
-    border-radius: 50%;
-    display: inline-block;
-    background-color:  #FFA400;
-    padding: 1rem;
-    box-shadow: 0 0.3rem 0.7rem rgba(0, 0, 0, 0.3);
-    z-index: 100;
-    text-align: center;
-    cursor: pointer;
-}
+
 
 
 .show-card {
@@ -177,7 +163,7 @@ body {
     z-index: 200;
     /* background-color: rgba(0, 0, 0, 0.87); */
     /* background-color: rgba(255, 68, 0, 0.75); */
-    background-image: linear-gradient(to right bottom, rgba(255, 165, 0, 0.8), rgba(242, 38, 19, 0.6));
+    background-image: linear-gradient(to right bottom, rgba(255, 165, 0, 0.9), rgba(255, 98, 83, 0.9));
     transition: all 0.3s ease;
     display: none;
     /* display: none; */
@@ -188,13 +174,26 @@ body {
     height: 90%;
     width: 70%;
     background-color: #fff;
-    box-shadow: rgba(0, 0, 0, 0.2) 1px 1px 5px;
-    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.25);
+    border-radius: 2px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     padding: 2rem;
     transition: all 0.3s ease;
+    animation-name: slideUp;
+    animation-duration: 0.6s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+@keyframes slideUp{
+    from{
+        transform: translate(-50%, -20%); 
+    }
+    to{
+        transform: translate(-50%, -50%);
+    }
 }
 
 .close {
@@ -209,7 +208,7 @@ body {
 .card-top {
     width: 100%;
     /* background-color: green; */
-    height: 65%;
+    height: 60%;
     padding: 1rem;
     padding-top: 0;
     text-align: center;
@@ -351,6 +350,7 @@ input[type="number"] {
 .minus {
     font-size: 2rem;
     border-bottom: 2px solid  #FFA400;
+    transition: all 0.2s ease;
 }
 
 .plus {
@@ -359,17 +359,17 @@ input[type="number"] {
 
 .submit {
     position: absolute;
-    bottom: 1.5rem;
+    bottom: 1.1rem;
     display: inline-block;
     left: 50%;
     transform: translateX(-50%) translateY(-2px);
-    padding: 0.4rem 2rem;
+    padding: 0.4rem 2.2rem;
     border: none;
     color: #fff;
 
     background-color:  #FFA400;
-    border-radius: 5px;
-    font-size: 1rem;
+    border-radius: 4px;
+    font-size: 1.2rem;
     text-transform: capitalize;
     box-shadow: 0 0.3rem 0.5rem rgba(51, 51, 51, 0.2);
     cursor: pointer;
@@ -378,6 +378,10 @@ input[type="number"] {
 .submit:active {
     transform: translateX(-50%) translateY(0);
     outline: none !important;
+}
+.submit:hover{
+    transform: translateX(-50%) translateY(0px);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.14);
 }
 
 .submit:focus {
@@ -663,6 +667,26 @@ input[type="number"] {
     .ckeckout-form-container{
         width: 90%;
     }
+    .container{
+        text-align: center;
+    }
+    .logo{
+        display: inline-block;
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+    }
+    .card{
+        margin: 1.1rem;
+    }
+    .lead-heading{
+        margin-bottom: 2rem;
+    } 
+    .card-expanded{
+        top: 51%;
+    }
+    
 }
 
 @media (max-width:786px){
@@ -683,6 +707,13 @@ input[type="number"] {
     .text{
         padding: 10px 1rem;
     }
+
+    /* cardlist */
+
+    .cardlist{
+        padding: 0;
+    }
+
     .food-name{
         margin-top: 10rem;
     }
@@ -710,7 +741,7 @@ input[type="number"] {
         display: none;
     }
     .submit{
-        bottom: 2rem;
+        bottom: 3rem;
     }
     .ckeckout-form-container{
         width: 93%;
@@ -783,6 +814,22 @@ input[type="number"] {
         width: 100%;
         padding: 1rem;
     }
+    .form-group-delivery{
+        flex-wrap: wrap;
+    }
+    .delivery-labels{
+        width: 100%;
+    }
+    .delivery-form-input{
+        width: 100%;
+        margin-left: 0;
+        margin-top: 0.5rem;
+    }
+    .delivery-text-area{
+        width: 100%;
+        margin-left: 0;
+        margin-top: 0.5rem;
+    }
 
 
 }
@@ -791,6 +838,16 @@ input[type="number"] {
 @media (max-height: 700px){
     .image-container{
         height: 17rem;
+    }
+    .tag{
+        font-size: 1.3rem;
+    }
+    .checkout-page-new{
+        overflow-y: auto;
+    }
+    .ckeckout-form-container{
+        top: 60%;
+        margin-bottom: 3rem;
     }
 }
 
