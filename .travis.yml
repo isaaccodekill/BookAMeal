@@ -3,6 +3,6 @@ node_js:
  - "node"
 env:
  global:
- - CODE_CLIMATE_REPO_TOKEN=93ee80987ff11b9caae9d3c0be6324883c7a4a6c
+ - CODE_CLIMATE_REPO_TOKEN=a863eeec1651fec18594c74410d73c62a6f091aec0bd63c82884f9dbf71ab09b
 after_success:
   -npm run coverage
