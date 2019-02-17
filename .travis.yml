@@ -1,8 +1,6 @@
 language: node_js
 node_js:
  - "node"
-services:
- - postgresql
 env:
  global:
  - CODE_CLIMATE_REPO_TOKEN=93ee80987ff11b9caae9d3c0be6324883c7a4a6c
