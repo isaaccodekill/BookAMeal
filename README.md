@@ -12,8 +12,8 @@ A web app made for ordering meals with the following features
 4. Authenticated users can see the menu of the day
 5. Authenticated Users can modify their meal choice
 6. Authenticated users can make orders based on thier meal choice
-7. Admin / Caterer can see the orders made by users
-8. Admin can see the amount of money made by the end of the day
+7. Admin / Caterer can see the orders made by users.
+8. Admin can see the amount of money made by the end of the day.
 
 # Link to Website
 https://isaaccodekill.github.io/BookAMeal/UI/
