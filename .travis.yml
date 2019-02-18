@@ -4,5 +4,6 @@ node_js:
 env:
  global:
  - CODE_CLIMATE_REPO_TOKEN=a863eeec1651fec18594c74410d73c62a6f091aec0bd63c82884f9dbf71ab09b
+script: npm test 
 after_success:
   - npm run coverage
