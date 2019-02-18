@@ -7,6 +7,5 @@ env:
 cache:
   directories:
     - "node_modules"
-script: ./API/package.json   
 after_success:
   - npm run coverage
