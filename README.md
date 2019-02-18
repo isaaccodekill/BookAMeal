@@ -1,5 +1,6 @@
 [![Coverage Status](https://coveralls.io/repos/github/isaaccodekill/BookAMeal/badge.svg?branch=develop)](https://coveralls.io/github/isaaccodekill/BookAMeal?branch=develop)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/e46d7403dec00b237322/test_coverage)](https://codeclimate.com/github/isaaccodekill/BookAMeal/test_coverage)
+[![Maintainability](https://api.codeclimate.com/v1/badges/e46d7403dec00b237322/maintainability)](https://codeclimate.com/github/isaaccodekill/BookAMeal/maintainability)
 
 
 # Book-a-meal-App
