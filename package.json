@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "nyc --require @babel/register mocha --compilers js:@babel/register ./API/test --exit",
-    "start": "node ./API/dist/index.js",
+    "start": "node ./API/dist/app.js",
     "build": "babel ./ -d ./API/dist --ignore ./API/node_modules/,./API/dist",
     "dev": "nodemon --exec babel-node ./API/app.js",
     "generate-lcov": "nyc report --reporter=text-lcov > lcov.info",
