@@ -7,8 +7,5 @@ env:
 cache:
   directories:
     - "node_modules"
-before_install: cd API
-install:
-  - npm install     
 after_success:
   - npm run coverage
