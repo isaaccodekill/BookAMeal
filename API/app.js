@@ -9,7 +9,7 @@ app.use(bodyparser.urlencoded({ extended: true }));
 app.use(bodyparser.json());
 
 app.get('/', (req, res) => {
-  res.send('Hello world');
+  res.send('Welcome to isaac Bello\'s Book-A-Meal project');
 });
 
 app.use('/api/v1/meals', mealRoutes);
