@@ -638,6 +638,12 @@ body {
     .card-bottom{
         height: 50%;
     }
+    .sideBar-bottom{
+        margin-top: 2rem;
+    }
+    .logo-sideBar{
+        top: 1rem;
+    }
 }
 
 
@@ -657,6 +663,18 @@ body {
         z-index: 500;
         overflow: hidden;
         display: none;
+    }
+    .sideBar-bottom{
+        margin-top: 2rem;
+    }
+    .logo-sideBar{
+        top: 1rem;
+    }
+    .quantity2{
+        position: relative;
+        margin-bottom: 0;
+        top: 0;
+        right: 0;
     }
     .listItem{
         width: 100%;
