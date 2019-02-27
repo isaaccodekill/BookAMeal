@@ -12,6 +12,15 @@ const delivery = document.querySelector(".delivery")
 const deliverybody = document.querySelector('.delivery-form-content')
 const carryout = document.querySelector(".carryout")
 const carryoutBody = document.querySelector(".carryout-content")
+const finalOrder = document.querySelector(".delivery-submit")
+const popUp = document.querySelector(".success")
+
+
+finalOrder.addEventListener("click", function (event) {
+    event.preventDefault()
+    popUp.classList.remove('invisible');
+})
+
 
 let cards = Array.from(card)
 

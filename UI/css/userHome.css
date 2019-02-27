@@ -27,6 +27,70 @@ body {
     padding: 1rem; 
 }
 
+.success{
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    z-index: 10000;
+    background-color: rgba(0, 0, 0, 0.7);
+    /* overflow: hidden; */
+}
+
+.invisible{
+    display: none;
+}
+
+.success-pop-up{
+    background-color: #fff;
+    width: 700px;
+    padding: 2rem 4rem;
+    border-radius: 3px;
+    box-shadow: 0.5rem 1rem 3rem rgba(0, 0, 0, 0.3);
+    top: 2rem;
+    opacity: 0;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    animation-name: popIn;
+    animation-delay: 1s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    animation-duration: 3s;
+}
+
+@keyframes popIn{
+    from{
+        transform: translate(-50%, 4rem);
+        opacity: 0;
+    }
+
+    to{
+        transform: translate(-50%, 0);
+        opacity: 1;
+    }
+}
+
+.success-pop-up-img{
+    height: 150px;
+}
+
+.success-pop-up-text{
+    font-size: 1.3rem;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+}
+
+a.success-pop-up-btn{
+    margin-top: 3rem;
+    padding: 0.5rem 2rem;
+    font-size: 1.2rem;
+    background-color: #6AC259;
+    text-decoration: none;
+    color: #fff;
+    border-radius: 3px;
+}
+
 .logo{
     position: relative;
     top: 0;
@@ -686,7 +750,14 @@ input[type="number"] {
     .card-expanded{
         top: 51%;
     }
-    
+    .success-pop-up{
+        width: 90%;
+        padding: 1rem;
+        padding-bottom: 1.5rem;
+    }
+    .success-pop-up-img{
+        height: 80px;
+    }
 }
 
 @media (max-width:786px){
@@ -737,11 +808,35 @@ input[type="number"] {
         text-align: center;
     }
     .num-items{
-        flex-direction: column;
-        display: none;
+        flex-direction: row;
+        width: 40%;
+        height: 2rem;
+        float: none;
+        position: absolute;
+        bottom: 7.5rem;
+        left: 50%;
+        transform: translateX(-50%);
+
+    }
+    .minus{
+        border: none;
+        border-right: 2px solid #FFA400;
+        height: 100%;
+    }
+    .plus{
+        border: none;
+        border-left: 2px solid #FFA400;
+        height: 100%;
+    }
+    .text-num{
+        height: 100%;
+        font-size: 0.2rem;
     }
     .submit{
         bottom: 3rem;
+    }
+    #targetInput{
+        font-size: 1rem;
     }
     .ckeckout-form-container{
         width: 93%;
@@ -840,7 +935,8 @@ input[type="number"] {
         height: 17rem;
     }
     .tag{
-        font-size: 1.3rem;
+        font-size: 1.25rem;
+        margin-top: 0.3rem;
     }
     .checkout-page-new{
         overflow-y: auto;
@@ -849,5 +945,12 @@ input[type="number"] {
         top: 60%;
         margin-bottom: 3rem;
     }
+    .price{
+        font-size: 1.3rem;
+        transform: translateY(0);
+    }
+    .num-items{
+        margin: 0;
+        bottom: 6.5rem;
+    }
 }
-

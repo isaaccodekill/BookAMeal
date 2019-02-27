@@ -4,6 +4,10 @@
     padding: 0;
 }
 
+body{
+    font-family: 'Open Sans', sans-serif;
+}
+
 .container{
     position: absolute;
     height: 100%;
@@ -16,7 +20,7 @@
 
 .image{
     display: block;
-    height: 39%;
+    height: 30%;
     /* width: 50%; */
     text-align: center;
     margin-bottom: 3rem;
@@ -28,7 +32,30 @@
 }
 
 .text{
-    font-family: 'Open Sans', sans-serif;
     text-align: center;
-    width: 100%
+    width: 100%;
+    margin-bottom: 2rem;
+}
+
+.Order-container{
+    padding: 3rem 5rem;
+    border: 2px solid black;
+    border-radius: 4px;
+}
+
+.btn{
+    display: inline-block;
+    margin: 0.2rem;
+    margin-top: 2rem;
+    padding: 0.7rem 2rem;
+    color: #fff;
+    border-radius: 3px;
+}
+
+.edit{
+    background-color: gray;
+}
+
+.delete{
+    background-color: red;
 }
