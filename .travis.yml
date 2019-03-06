@@ -11,7 +11,7 @@ cache:
     - "node_modules"
 before_script:
  - cat .env.travis >> env
- - psql -c 'DROP DATABASE IF EXITS "travis_bookmeal";'
+ - psql -c 'DROP DATABASE IF EXIST "travis_bookmeal";'
  - psql -c 'CREATE DATABASE "travis_bookmeal";' -U postgres
  - psql -c 'CREATE USER zik WITH PASSWORD "imoleayo";' -U postgres
 after_success:
