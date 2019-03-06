@@ -1,6 +1,7 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 import jwt from 'jsonwebtoken';
+import bcrypt from 'bcryptjs';
 import dotenv from 'dotenv';
 import app from '../API/app';
 import Caterer from '../API/models/caterer';
@@ -16,10 +17,11 @@ chai.use(chaiHttp);
 let CatererIdAccessible;
 
 before((done) => {
+  const hashedPassword = bcrypt.hashSync('password', 10);
   Caterer.create({
     name: 'zik',
     email: 'newemail@gmail.com',
-    password: 'password', // dont try this at home
+    password: hashedPassword, // dont try this at home
     phoneNumber: '12345678901',
     restaurant: 'binat foods',
   })
@@ -29,20 +31,20 @@ before((done) => {
     });
 });
 
-// after((done) => {
-//   Caterer.destroy({ where: { email: 'newemail@gmail.com' } })
-//     .then((caterer) => {
-//       CatererIdAccessible = caterer.id;
-//       done();
-//     });
-// });
+after((done) => {
+  Caterer.destroy({ where: { email: 'newemail@gmail.com' } })
+    .then((caterer) => {
+      CatererIdAccessible = caterer.id;
+      done();
+    });
+});
 
 
 describe('GET /api/v1/meals', () => {
   it('should return an array of all the meals', (done) => {
     // get jwt token
-    const Token = jwt.sign({ id: CatererIdAccessible, isCaterer: true }, process.env.SECRET);
-
+    const Token = jwt.sign({ id: CatererIdAccessible, isCaterer: true }, process.env.SECRET,
+      { expiresIn: 86400 });
     chai.request(app)
       .get('/api/v1/meals')
       .set('bearer', Token)
