@@ -1,9 +1,25 @@
-class menu {
-  constructor(date, chef, mealOptions) {
-    this.date = Date.now();
-    this.chef = chef;
-    this.mealOptions = mealOptions;
-  }
-}
+import Sequelize from 'sequelize';
+import { db } from './index';
 
-export default menu;
+const Menu = db.define('Menu', {
+  id: {
+    allowNull: false,
+    autoIncrement: true,
+    primaryKey: true,
+    type: Sequelize.INTEGER,
+  },
+  createdAt: {
+    allowNull: false,
+    type: Sequelize.DATE,
+  },
+  updatedAt: {
+    allowNull: false,
+    type: Sequelize.DATE,
+  },
+  MenuItems: {
+    type: Sequelize.ARRAY(Sequelize.INTEGER),
+  },
+});
+
+
+export default Menu;

@@ -1,56 +1,67 @@
 import Menu from '../models/menu';
 import Meal from '../models/meal';
+import Caterer from '../models/caterer';
 
 class menuService {
-  constructor(chef) {
-    this.menu = new Menu();
-    this.menu.chef = chef;
-    this.menu.date = new Date().toLocaleDateString();
-    this.menu.mealOptions = [];
+  static getMenu(req, res, next) {
+    Menu.findAll()
+      .then((menu) => {
+        res.status(200).json({
+          status: 'successful',
+          menu: menu[0],
+        });
+      })
+      .catch((error) => {
+        res.status(400).json({
+          status: 'unsuccesful',
+          error,
+        });
+        next();
+      });
   }
 
-  getMenu() {
-    const availableMenu = this.menu;
-    return availableMenu;
+  static createAndSaveMenu(req, res, next) {
+    return Menu.create({
+      // chefId: req.user.id,
+      MenuItems: req.body.MenuItems,
+    }, {
+      include: [{
+        model: Caterer,
+      }],
+    })
+      .then((menu) => {
+        res.status(200).json({
+          status: 'successful',
+          menu,
+        });
+      })
+      .catch((error) => {
+        res.status(400).json({
+          status: 'unsuccesful',
+          error,
+        });
+        next();
+      });
   }
 
-  createAndSaveMenu(body) {
-    if (!body.mealOptions || body.mealOptions.length === 0) {
-      return 'Cannot create an empty menu';
-    }
-    const newMeals = body.mealOptions.map((meal) => {
-      const newMeal = new Meal();
-      newMeal.id = meal.id;
-      newMeal.price = meal.price;
-      newMeal.description = meal.description;
-      newMeal.name = meal.name;
-      newMeal.image = meal.image;
-      newMeal.currency = meal.currency;
-
-      return newMeal;
-    });
-
-    this.menu.mealOptions = newMeals;
-    this.menu.chef = body.chef;
-    this.menu.date = new Date().toLocaleDateString();
-
-    return { message: 'menu succesfully created' };
-  }
-
-  editMenu(body) {
-    const newMeals = body.mealOptions.map((meal) => {
-      const newMeal = new Meal();
-      newMeal.id = meal.id;
-      newMeal.price = meal.price;
-      newMeal.description = meal.description;
-      newMeal.name = meal.name;
-      newMeal.image = newMeal.image;
-      newMeal.currency = meal.currency;
-      return newMeal;
-    });
-
-    this.menu.mealOptions = newMeals;
-    return 'The menu was edited';
+  static editMenu(req, res, next) {
+    return Menu.Update({
+      // chefId: req.user.id,
+      MenuItems: req.body.MenuItems,
+    }, { where: { id: 1 } })
+      .then((menu) => {
+        res.status(200).json({
+          status: 'successful',
+          menu,
+        });
+      })
+      .catch((error) => {
+        res.status(400).json({
+          status: 'unsuccesful',
+          error,
+        });
+        next();
+      });
   }
 }
 

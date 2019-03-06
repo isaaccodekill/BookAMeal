@@ -1,23 +1,17 @@
 import express from 'express';
 import OrderServices from '../services/orderService';
+import OrderMiddleware from '../middleware/order';
 
-const orderService = new OrderServices();
 
 const router = express.Router();
-router.get('/', (req, res) => {
-  res.status(200).json(orderService.getOrders());
-});
+router.route('/')
+  .get(OrderServices.getOrders)
+  .post(OrderMiddleware.validateorderAddition, OrderServices.createAndSaveOrder);
 
-router.post('/', (req, res) => {
-  res.json(orderService.createAndSaveOrder(req.body));
-});
 
-router.put('/:id', (req, res) => {
-  res.json(orderService.findOrderByIdAndUpdate(req.params.id, req.body));
-});
-
-router.delete('/:id', (req, res) => {
-  res.json(orderService.findOrderByIdAndDelete(req.params.id));
-});
+router.route('/:id')
+  .get(OrderServices.findOrderById)
+  .put(OrderMiddleware.validateOrderUpdate, OrderServices.findOrderByIdAndUpdate)
+  .delete(OrderServices.findOrderByIdAndDelete);
 
 export default router;

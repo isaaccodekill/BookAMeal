@@ -1,15 +1,40 @@
-import Meal from './meal';
+import Sequelize from 'sequelize';
+import { db } from './index';
+// const order = (sequelize, DataTypes) => {
+const Order = db.define('Order', {
+  id: {
+    allowNull: false,
+    autoIncrement: true,
+    primaryKey: true,
+    type: Sequelize.INTEGER,
+  },
+  createdAt: {
+    allowNull: false,
+    type: Sequelize.DATE,
+  },
+  updatedAt: {
+    allowNull: false,
+    type: Sequelize.DATE,
+  },
+  quantity: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+  },
+  method: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+  address: {
+    type: Sequelize.TEXT,
+    allowNull: false,
+  },
+  cost: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+  },
+  resolved: {
+    type: Sequelize.BOOLEAN,
+  },
+});
 
-class order {
-  constructor(id, quantity, method, address, cost) {
-    this.id = id;
-    this.meal = new Meal();
-    this.quantity = quantity;
-    this.method = method;
-    this.address = address;
-    this.cost = cost;
-    this.time = Date.now();
-  }
-}
-
-export default order;
+export default Order;

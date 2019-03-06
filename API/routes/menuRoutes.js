@@ -1,21 +1,13 @@
 import express from 'express';
 import MenuServices from '../services/menuServices';
-
-const menuService = new MenuServices();
+import MenuValidation from '../middleware/menu';
 
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
-  res.status(200).json(menuService.getMenu());
-});
-
-router.post('/', (req, res) => {
-  res.status(201).json(menuService.createAndSaveMenu(req.body));
-});
-
-router.put('/', (req, res) => {
-  res.status(201).json(menuService.editMenu(req.body));
-});
+router.route('/')
+  .get(MenuServices.getMenu)
+  .post(MenuValidation.validateMenuCreate, MenuServices.createAndSaveMenu)
+  .put(MenuValidation.validateMenuEdit, MenuServices.editMenu);
 
 export default router;
