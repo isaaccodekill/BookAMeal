@@ -7,6 +7,7 @@ import MealValidation from '../middleware/meal';
 import Authorization from '../auth/authorization';
 
 const router = express.Router();
+
 router.route('/')
   .get(Authorization.checkForToken, Authorization.verifyCaterer, MealServices.getAllmeals)
   .post(Authorization.checkForToken, Authorization.verifyCaterer,
