@@ -4,7 +4,7 @@ import CatererAuthController from '../auth/catererAuthController';
 
 const router = Router();
 
-router.route('/register')
+router.route('/signup')
   .post(CatererValidation.validateCatererSignUp, CatererAuthController.Register);
 
 router.route('/login')

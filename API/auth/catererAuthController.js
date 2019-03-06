@@ -16,16 +16,19 @@ class CatererAuth {
       name: req.body.name,
       email: req.body.email,
       password: hashedPassword,
+      phoneNumber: req.body.phoneNumber,
+      restaurant: req.body.restaurant,
     })
       .then((caterer) => {
-        const token = jwt.sign({ id: caterer.id, isCaterer: true }, process.env.SECRET, { expiresIn: 86400 });
-        res.status(200).json({
+        const token = jwt.sign({ id: caterer.id, isCaterer: true }, process.env.SECRET,
+          { expiresIn: 86400 });
+        return res.status(200).json({
           message: 'successfull',
           token,
         });
       })
       .catch((error) => {
-        res.status(500).json({
+        return res.status(500).json({
           message: 'unsucessfull',
           error,
         });
@@ -33,7 +36,7 @@ class CatererAuth {
   }
 
   static Login(req, res, next) {
-    Caterer.findOne({ where: { title: req.body.email } })
+    Caterer.findOne({ where: { email: req.body.email } })
       .then((caterer) => {
         if (!caterer) {
           return res.status(500).json({
@@ -49,13 +52,13 @@ class CatererAuth {
           });
         }
         const token = jwt.sign({ id: caterer.id }, process.env.SECRET, { expiresIn: 86400 });
-        res.status(200).json({
+        return res.status(200).json({
           message: 'successfull',
           token,
         });
       })
       .catch((error) => {
-        res.status(500).json({
+        return res.status(500).json({
           message: 'unsuccessfull',
           error,
         });

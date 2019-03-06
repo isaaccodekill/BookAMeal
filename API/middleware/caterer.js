@@ -7,7 +7,7 @@ class CatererAuthValidation {
       email: joi.string().required(),
       phoneNumber: joi.number().required().min(11),
       password: joi.string().required().min(6),
-      resturant: joi.string().required(),
+      restaurant: joi.string().required(),
     });
     joi.validate(req.body, schema, (error, value) => {
       if (error !== null) {

@@ -5,13 +5,8 @@ import Sequelize from 'sequelize';
 dotenv.config();
 
 const db = new Sequelize(
-  process.env.DATABASE,
-  process.env.DATABASE_USER,
-  process.env.DATABASE_PASSWORD,
+  process.env.DATABASE_URL,
   {
-    dialect: 'postgres',
-    host: process.env.HOST,
-    port: process.env.DATABASE_PORT,
     operatorsAliases: false,
   },
 );

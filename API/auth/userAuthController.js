@@ -19,14 +19,15 @@ class UserAuth {
       password: hashedPassword,
     })
       .then((user) => {
-        const token = jwt.sign({ id: user.id, isUser: true }, process.env.SECRET, { expiresIn: 86400 });
-        res.status(200).json({
+        const token = jwt.sign({ id: user.id, isUser: true }, process.env.SECRET,
+          { expiresIn: 86400 });
+        return res.status(200).json({
           message: 'User Registered',
           token,
         });
       })
       .catch((error) => {
-        res.status(500).json({
+        return res.status(500).json({
           message: 'unsucessfull',
           error,
         });
@@ -45,18 +46,18 @@ class UserAuth {
         const passwordIsValid = bcrypt.compareSync(req.body.password, user.password);
         if (!passwordIsValid) {
           return res.status(401).json({
-            message: 'unsuccessfull',
+            message: 'Wrong password',
             token: null,
           });
         }
         const token = jwt.sign({ id: user.id }, process.env.SECRET, { expiresIn: 86400 });
-        res.status(200).json({
+        return res.status(200).json({
           message: 'User Signed In',
           token,
         });
       })
       .catch((error) => {
-        res.status(500).json({
+        return res.status(500).json({
           message: 'unsuccessfull',
           error,
         });
