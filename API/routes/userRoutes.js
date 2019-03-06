@@ -1,20 +1,16 @@
 import { Router } from 'express';
-// import catererValidation from '../middleware/caterer';
-// import catererAuthController from '../auth/catererAuthController';
+import UserValidation from '../middleware/user';
+import UserAuthController from '../auth/userAuthController';
 
 const router = Router();
 // register
 // login
 // logout
 
-router.route('/register')
-  .post();
+router.route('/signup')
+  .post(UserValidation.validateUserSignUp, UserAuthController.Register);
 
 router.route('/login')
-  .post();
-
-router.route('/logout')
-  .post();
-
+  .post(UserValidation.validateUserLogin, UserAuthController.Login);
 
 export default router;

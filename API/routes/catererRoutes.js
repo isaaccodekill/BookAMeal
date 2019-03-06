@@ -1,20 +1,14 @@
 import { Router } from 'express';
-import catererValidation from '../middleware/caterer';
-import catererAuthController from '../auth/catererAuthController';
+import CatererValidation from '../middleware/caterer';
+import CatererAuthController from '../auth/catererAuthController';
 
 const router = Router();
-// register
-// login
-// logout
 
 router.route('/register')
-  .post();
+  .post(CatererValidation.validateCatererSignUp, CatererAuthController.Register);
 
 router.route('/login')
-  .post();
-
-router.route('/logout')
-  .post();
+  .post(CatererValidation.validateCatererLogin, CatererAuthController.Login);
 
 
 export default router;

@@ -53,8 +53,8 @@ app.get('/', (req, res) => {
 app.use('/api/v1/meals', mealRoutes);
 app.use('/api/v1/menu', menuRoutes);
 app.use('/api/v1/orders', orderRoutes);
-app.use('/ap1/v1/caterer', catererRoutes);
-app.use('/ap1/v1/user', userRoutes);
+app.use('/ap1/v1/caterer/auth', catererRoutes);
+app.use('/ap1/v1/auth', userRoutes);
 
 const PORT = process.env.PORT || 5500;
 db.sync()

@@ -1,11 +1,11 @@
 import express from 'express';
 import OrderServices from '../services/orderService';
 import OrderMiddleware from '../middleware/order';
-
+import Authorization from '../auth/authorization';
 
 const router = express.Router();
 router.route('/')
-  .get(OrderServices.getOrders)
+  .get(Authorization.checkForToken, Authorization.verifyCaterer, OrderServices.getOrders)
   .post(OrderMiddleware.validateorderAddition, OrderServices.createAndSaveOrder);
 
 
