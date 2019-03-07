@@ -30,10 +30,8 @@ before((done) => {
 });
 
 after((done) => {
-  Caterer.destroy({ where: { email: 'newemail@gmail.com' } })
-    .then((res) => {
-      done();
-    });
+  Caterer.destroy({ where: { email: 'newemail@gmail.com' } });
+  done();
 });
 
 describe('GET /api/v1/meals', () => {
