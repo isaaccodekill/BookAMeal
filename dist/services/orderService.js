@@ -22,8 +22,6 @@ var orderServices =
 function () {
   function orderServices() {
     _classCallCheck(this, orderServices);
-
-    this.orders = [];
   }
 
   _createClass(orderServices, null, [{

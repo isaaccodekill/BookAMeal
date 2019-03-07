@@ -7,8 +7,6 @@ exports.default = void 0;
 
 var _menu = _interopRequireDefault(require("../models/menu"));
 
-var _meal = _interopRequireDefault(require("../models/meal"));
-
 var _caterer = _interopRequireDefault(require("../models/caterer"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -28,47 +26,47 @@ function () {
 
   _createClass(menuService, null, [{
     key: "getMenu",
-    value: function getMenu(req, res, next) {
-      _menu.default.findAll().then(function (menu) {
-        res.status(200).json({
+    value: function getMenu(req, res) {
+      _menu.default.findAll({
+        include: [_caterer.default]
+      }).then(function (menu) {
+        return res.status(200).json({
           status: 'successful',
           menu: menu[0]
         });
       }).catch(function (error) {
-        res.status(400).json({
+        return res.status(400).json({
           status: 'unsuccesful',
           error: error
         });
-        next();
       });
     }
   }, {
     key: "createAndSaveMenu",
-    value: function createAndSaveMenu(req, res, next) {
-      return _menu.default.create({
-        // chefId: req.user.id,
+    value: function createAndSaveMenu(req, res) {
+      _menu.default.create({
+        // chefId: req.caterer.id,
         MenuItems: req.body.MenuItems
       }, {
         include: [{
           model: _caterer.default
         }]
       }).then(function (menu) {
-        res.status(200).json({
+        return res.status(200).json({
           status: 'successful',
           menu: menu
         });
       }).catch(function (error) {
-        res.status(400).json({
+        return res.status(400).json({
           status: 'unsuccesful',
           error: error
         });
-        next();
       });
     }
   }, {
     key: "editMenu",
-    value: function editMenu(req, res, next) {
-      return _menu.default.Update({
+    value: function editMenu(req, res) {
+      _menu.default.update({
         // chefId: req.user.id,
         MenuItems: req.body.MenuItems
       }, {
@@ -76,16 +74,16 @@ function () {
           id: 1
         }
       }).then(function (menu) {
-        res.status(200).json({
+        return res.status(200).json({
           status: 'successful',
+          message: 'menu was edited',
           menu: menu
         });
       }).catch(function (error) {
-        res.status(400).json({
+        return res.status(400).json({
           status: 'unsuccesful',
           error: error
         });
-        next();
       });
     }
   }]);
