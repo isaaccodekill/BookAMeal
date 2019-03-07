@@ -68,7 +68,6 @@ describe('GET /api/v1/menu', () => {
         res.body.should.be.a('object');
         res.body.status.should.equal('successful');
         res.body.menu.should.be.a('object');
-        res.body.menu.should.be.a('array');
         done();
       });
   });

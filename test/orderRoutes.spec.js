@@ -64,7 +64,7 @@ describe('POST /api/v1/orders', () => {
       quantity: 2,
       method: 'takeout',
       address: 'address',
-      resolved: 'false',
+      resolved: false,
     };
 
 
