@@ -7,6 +7,13 @@ import app from '../API/app';
 const should = chai.should();
 /* eslint-enable no-unused-vars */
 chai.use(chaiHttp);
+
+before((done) => {
+  app.on('appStarted', () => {
+    done();
+  });
+});
+
 describe('POST /ap1/v1/caterer/auth/', () => {
   it('/signup should succesfully register a caterer', (done) => {
     const Caterer = {

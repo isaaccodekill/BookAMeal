@@ -60,6 +60,7 @@ const PORT = process.env.PORT || 5500;
 db.sync()
   .then(() => {
     console.log('DB connected');
+    app.emit('appStarted');
     app.listen(PORT);
   })
   .catch((err) => {
