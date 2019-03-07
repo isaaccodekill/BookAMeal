@@ -15,19 +15,19 @@ chai.use(chaiHttp);
 
 let CatererIdAccessible;
 
-before((done) => {
-  Caterer.create({
-    name: 'zik',
-    email: 'newemail@gmail.com',
-    password: 'hashedPassword', // dont try this at home
-    phoneNumber: '12345678901',
-    restaurant: 'binat foods',
-  })
-    .then((caterer) => {
-      CatererIdAccessible = caterer.id;
-      done();
-    });
-});
+// before((done) => {
+//   Caterer.create({
+//     name: 'zik',
+//     email: 'newemail@gmail.com',
+//     password: 'hashedPassword', // dont try this at home
+//     phoneNumber: '12345678901',
+//     restaurant: 'binat foods',
+//   })
+//     .then((caterer) => {
+//       CatererIdAccessible = caterer.id;
+//       done();
+//     });
+// });
 
 after((done) => {
   Caterer.destroy({ where: { email: 'newemail@gmail.com' } });
