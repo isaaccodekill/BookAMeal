@@ -71,19 +71,16 @@ describe('GET /api/v1/orders', () => {
 
 describe('POST /api/v1/orders', () => {
   it('should create and save a new order', (done) => {
-    const body = {
-      cost: 2000,
-      MealId: validMealId,
-      quantity: 2,
-      method: 'takeout',
-      address: 'address',
-      resolved: false,
-    };
-
-
     chai.request(app)
       .post('/api/v1/orders')
-      .send(body)
+      .send({
+        cost: 2000,
+        MealId: validMealId,
+        quantity: 2,
+        method: 'takeout',
+        address: 'address',
+        resolved: false,
+      })
       .end((err, res) => {
         res.should.status(200);
         res.body.should.be.a('object');
