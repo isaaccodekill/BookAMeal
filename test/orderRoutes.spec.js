@@ -75,13 +75,14 @@ describe('POST /api/v1/orders', () => {
       .post('/api/v1/orders')
       .send({
         cost: 2000,
-        MealId: validMealId,
+        MealId: 2,
         quantity: 2,
         method: 'takeout',
         address: 'address',
         resolved: false,
       })
       .end((err, res) => {
+        console.log(validMealId);
         res.should.status(200);
         res.body.should.be.a('object');
         res.body.should.have.property('status');
