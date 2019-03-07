@@ -5,7 +5,7 @@ import jwt from 'jsonwebtoken';
 import app from '../API/app';
 import Caterer from '../API/models/caterer';
 import User from '../API/models/user';
-
+import Meal from '../API/models/meal';
 
 dotenv.config();
 
@@ -14,6 +14,7 @@ const should = chai.should();
 /* eslint-enable no-unused-vars */
 
 let CatererIdAccessible;
+let validMealId;
 
 before((done) => {
   Caterer.create({
@@ -25,14 +26,26 @@ before((done) => {
   })
     .then((caterer) => {
       CatererIdAccessible = caterer.id;
-      done();
+      Meal.create({
+        name: 'eba and fish and juice',
+        image: 'image url',
+        price: 1700,
+        calories: 'infinite x 2',
+        description: 'ask nosa ionno',
+        currency: 'naira',
+      })
+        .then((meal) => {
+          validMealId = meal.id;
+          done();
+        });
     });
 });
 
 after((done) => {
   Caterer.destroy({ where: { email: 'newemail2@gmail.com' } })
     .then((res) => {
-      User.destroy({ where: { email: 'newuser@gmail.com' } })
+      User.destroy({ where: { email: 'newuser@gmail.com' } });
+      Meal.destroy({ where: { id: validMealId } });
       done();
     });
 });
@@ -60,7 +73,7 @@ describe('POST /api/v1/orders', () => {
   it('should create and save a new order', (done) => {
     const body = {
       cost: 2000,
-      MealId: 2,
+      MealId: validMealId,
       quantity: 2,
       method: 'takeout',
       address: 'address',
