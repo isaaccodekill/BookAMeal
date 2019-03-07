@@ -9,20 +9,14 @@ var _express = _interopRequireDefault(require("express"));
 
 var _menuServices = _interopRequireDefault(require("../services/menuServices"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _menu = _interopRequireDefault(require("../middleware/menu"));
 
-var menuService = new _menuServices.default();
+var _authorization = _interopRequireDefault(require("../auth/authorization"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var router = _express.default.Router();
 
-router.get('/', function (req, res) {
-  res.status(200).json(menuService.getMenu());
-});
-router.post('/', function (req, res) {
-  res.status(201).json(menuService.createAndSaveMenu(req.body));
-});
-router.put('/', function (req, res) {
-  res.status(201).json(menuService.editMenu(req.body));
-});
+router.route('/').get(_authorization.default.checkForToken, _authorization.default.verifyUser, _menuServices.default.getMenu).post(_authorization.default.checkForToken, _authorization.default.verifyCaterer, _menu.default.validateMenuCreate, _menuServices.default.createAndSaveMenu).put(_authorization.default.checkForToken, _authorization.default.verifyCaterer, _menu.default.validateMenuEdit, _menuServices.default.editMenu);
 var _default = router;
 exports.default = _default;

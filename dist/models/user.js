@@ -11,8 +11,23 @@ var _index = require("./index");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// const order = (sequelize, DataTypes) => {
-var Order = _index.db.define('Order', {
+var User = _index.db.define('User', {
+  name: {
+    type: _sequelize.default.STRING,
+    allowNull: false
+  },
+  phoneNumber: {
+    type: _sequelize.default.STRING,
+    allowNull: false
+  },
+  email: {
+    type: _sequelize.default.STRING,
+    allowNull: false
+  },
+  password: {
+    type: _sequelize.default.STRING,
+    allowNull: false
+  },
   id: {
     allowNull: false,
     autoIncrement: true,
@@ -26,27 +41,8 @@ var Order = _index.db.define('Order', {
   updatedAt: {
     allowNull: false,
     type: _sequelize.default.DATE
-  },
-  quantity: {
-    type: _sequelize.default.INTEGER,
-    allowNull: false
-  },
-  method: {
-    type: _sequelize.default.STRING,
-    allowNull: false
-  },
-  address: {
-    type: _sequelize.default.TEXT,
-    allowNull: false
-  },
-  cost: {
-    type: _sequelize.default.INTEGER,
-    allowNull: false
-  },
-  resolved: {
-    type: _sequelize.default.BOOLEAN
   }
 });
 
-var _default = Order;
+var _default = User;
 exports.default = _default;

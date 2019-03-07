@@ -32,10 +32,17 @@ class AuthorizationFlow {
     }
   }
 
-  static async verifyUser(req, res, next) {
-    const decodedData = await jwt.verify(req.token, process.env.SECRET);
-    req.user = decodedData.user;
-    next();
+  static verifyUser(req, res, next) {
+    const decodedData = jwt.verify(req.token, process.env.SECRET);
+    if (!decodedData.isUser) {
+      res.status(403).json({
+        message: 'forbidden/UnAuthorized',
+        error: 'Not a valid user',
+      });
+    } else {
+      req.user = decodedData.user;
+      next();
+    }
   }
 }
 

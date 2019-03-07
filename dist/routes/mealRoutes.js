@@ -9,26 +9,15 @@ var _express = _interopRequireDefault(require("express"));
 
 var _mealServices = _interopRequireDefault(require("../services/mealServices"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _meal = _interopRequireDefault(require("../middleware/meal"));
 
-var mealServices = new _mealServices.default();
+var _authorization = _interopRequireDefault(require("../auth/authorization"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var router = _express.default.Router();
 
-router.get('/', function (req, res) {
-  res.json(mealServices.getAllmeals(req.body));
-});
-router.get('/:id', function (req, res) {
-  res.json(mealServices.findMealById(req.params.id));
-});
-router.post('/', function (req, res) {
-  res.status(201).json(mealServices.createAndSave(req.body));
-});
-router.put('/:id', function (req, res) {
-  res.json(mealServices.findMealByIdAndUpdate(req.params.id, req.body));
-});
-router.delete('/:id', function (req, res) {
-  res.json(mealServices.findMealByIdAndDelete(req.params.id));
-});
+router.route('/').get(_authorization.default.checkForToken, _authorization.default.verifyCaterer, _mealServices.default.getAllmeals).post(_authorization.default.checkForToken, _authorization.default.verifyCaterer, _meal.default.validateMealAddition, _mealServices.default.createAndSave);
+router.route('/:id').get(_authorization.default.checkForToken, _authorization.default.verifyCaterer, _mealServices.default.findMealById).put(_authorization.default.checkForToken, _authorization.default.verifyCaterer, _meal.default.validateMealUpdate, _mealServices.default.findMealByIdAndUpdate).delete(_authorization.default.checkForToken, _authorization.default.verifyCaterer, _mealServices.default.findMealByIdAndDelete);
 var _default = router;
 exports.default = _default;

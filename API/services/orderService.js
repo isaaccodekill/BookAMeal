@@ -2,10 +2,6 @@ import Meal from '../models/meal';
 import Order from '../models/order';
 
 class orderServices {
-  constructor() {
-    this.orders = [];
-  }
-
   static getOrders(req, res, next) {
     return Order.findAll({ include: [Meal] })
       .then((Orders) => {

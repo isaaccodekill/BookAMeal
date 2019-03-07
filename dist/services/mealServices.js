@@ -20,76 +20,90 @@ var mealServices =
 function () {
   function mealServices() {
     _classCallCheck(this, mealServices);
-
-    this.meals = [];
   }
 
-  _createClass(mealServices, [{
+  _createClass(mealServices, null, [{
     key: "getAllmeals",
-    value: function getAllmeals() {
-      return this.meals;
+    value: function getAllmeals(req, res) {
+      return _meal.default.findAll().then(function (meals) {
+        res.status(200).json({
+          status: 'succesful',
+          meals: meals
+        });
+      }).catch(function (error) {
+        res.status(400).json({
+          status: 'unsuccesful',
+          error: error
+        });
+      });
     }
   }, {
     key: "createAndSave",
-    value: function createAndSave(body) {
-      if (this.meals.findIndex(function (x) {
-        return x.id === body.id || x.name === body.name;
-      }) > -1) {
-        return 'Meal already exists in database';
-      }
-
-      var newMeal = new _meal.default();
-      newMeal.id = body.id;
-      newMeal.name = body.name;
-      newMeal.image = body.image;
-      newMeal.price = body.price;
-      newMeal.currency = body.currency;
-      newMeal.calories = body.calories;
-      newMeal.description = body.description;
-      this.meals.push(newMeal);
-      return newMeal;
+    value: function createAndSave(req, res) {
+      return _meal.default.create(req.body).then(function (meal) {
+        res.status(200).json({
+          status: 'successful',
+          meal: meal
+        });
+      }).catch(function (error) {
+        res.status(400).json({
+          status: 'unsuccesful',
+          error: error
+        });
+      });
     }
   }, {
     key: "findMealById",
-    value: function findMealById(id) {
-      var index = this.meals.findIndex(function (mealItem) {
-        return mealItem.id === id;
+    value: function findMealById(req, res) {
+      return _meal.default.findByPk(req.params.id).then(function (foundMeal) {
+        res.status(200).json({
+          status: 'successful',
+          foundMeal: foundMeal
+        });
+      }).catch(function (error) {
+        res.status(400).json({
+          status: 'unsuccesful',
+          error: error
+        });
       });
-      return this.meals[index];
     }
   }, {
     key: "findMealByIdAndUpdate",
-    value: function findMealByIdAndUpdate(id, body) {
-      var foundmealItem = this.findMealById(id);
-      var updatedMealItem = new _meal.default();
-      updatedMealItem.id = body.id;
-      updatedMealItem.name = body.name;
-      updatedMealItem.image = body.image;
-      updatedMealItem.price = body.price;
-      updatedMealItem.currency = body.currency;
-      updatedMealItem.calories = body.calories;
-      updatedMealItem.description = body.description;
-      var index = this.meals.findIndex(function (x) {
-        return x.id === foundmealItem.id;
+    value: function findMealByIdAndUpdate(req, res) {
+      return _meal.default.update(req.body, {
+        where: {
+          id: req.params.id
+        }
+      }).then(function (updatedMeal) {
+        res.status(200).json({
+          status: 'successful',
+          updatedMeal: updatedMeal
+        });
+      }).catch(function (error) {
+        res.status(400).json({
+          status: 'unsuccesful',
+          error: error
+        });
       });
-      this.meals[index] = updatedMealItem;
-      return {
-        message: 'Meal item updated',
-        updatedMealItem: updatedMealItem
-      };
     }
   }, {
     key: "findMealByIdAndDelete",
-    value: function findMealByIdAndDelete(id) {
-      var foundmealItem = this.findMealById(id);
-      var index = this.meals.findIndex(function (x) {
-        return x.id === id;
+    value: function findMealByIdAndDelete(req, res) {
+      return _meal.default.destroy({
+        where: {
+          id: req.params.id
+        }
+      }).then(function (deletedMeal) {
+        res.status(200).json({
+          status: 'successful',
+          deletedMeal: deletedMeal
+        });
+      }).catch(function (error) {
+        res.status(400).json({
+          status: 'unsuccesful',
+          error: error
+        });
       });
-      this.meals.splice(index, 1);
-      return {
-        message: 'Meal item succefully deleted',
-        foundmealItem: foundmealItem
-      };
     }
   }]);
 

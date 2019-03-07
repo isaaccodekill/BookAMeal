@@ -39,7 +39,7 @@ class UserAuth {
       .then((user) => {
         if (!user) {
           return res.status(500).json({
-            essage: 'unsuccessfull',
+            message: 'unsuccessfull',
             error: 'User not found',
           });
         }

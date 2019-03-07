@@ -5,15 +5,31 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+var _sequelize = _interopRequireDefault(require("sequelize"));
 
-var menu = function menu(date, chef, mealOptions) {
-  _classCallCheck(this, menu);
+var _index = require("./index");
 
-  this.date = Date.now();
-  this.chef = chef;
-  this.mealOptions = mealOptions;
-};
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var _default = menu;
+var Menu = _index.db.define('Menu', {
+  id: {
+    allowNull: false,
+    autoIncrement: true,
+    primaryKey: true,
+    type: _sequelize.default.INTEGER
+  },
+  createdAt: {
+    allowNull: false,
+    type: _sequelize.default.DATE
+  },
+  updatedAt: {
+    allowNull: false,
+    type: _sequelize.default.DATE
+  },
+  MenuItems: {
+    type: _sequelize.default.ARRAY(_sequelize.default.INTEGER)
+  }
+});
+
+var _default = Menu;
 exports.default = _default;

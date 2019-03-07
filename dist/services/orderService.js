@@ -26,80 +26,110 @@ function () {
     this.orders = [];
   }
 
-  _createClass(orderServices, [{
+  _createClass(orderServices, null, [{
     key: "getOrders",
-    value: function getOrders() {
-      return this.orders;
+    value: function getOrders(req, res, next) {
+      return _order.default.findAll({
+        include: [_meal.default]
+      }).then(function (Orders) {
+        res.status(200).json({
+          status: 'successful',
+          Orders: Orders
+        });
+      }).catch(function (error) {
+        res.status(400).json({
+          status: 'unsuccesful',
+          error: error
+        });
+        next();
+      });
     }
   }, {
     key: "createAndSaveOrder",
-    value: function createAndSaveOrder(body) {
-      var newMeal = new _meal.default();
-      newMeal.id = body.meal.id;
-      newMeal.name = body.meal.name;
-      newMeal.price = body.meal.price;
-      newMeal.description = body.meal.description;
-      newMeal.currency = body.meal.currency;
-      newMeal.calories = body.meal.calories;
-      var newOrder = new _order.default();
-      newOrder.id = body.id;
-      newOrder.meal = newMeal;
-      newOrder.quantity = body.quantity;
-      newOrder.cost = newOrder.meal.price * newOrder.quantity;
-      newOrder.method = body.method;
-      newOrder.address = body.address;
-      this.orders.push(newOrder);
-      return {
-        message: 'An order was created',
-        newOrder: newOrder
-      };
+    value: function createAndSaveOrder(req, res, next) {
+      return _order.default.create({
+        quantity: req.body.quantity,
+        cost: req.body.cost,
+        address: req.body.address,
+        resolved: req.body.resolved,
+        method: req.body.method,
+        MealId: req.body.MealId // UserId: req.user.id,
+
+      }).then(function (newOrder) {
+        res.status(200).json({
+          status: 'successful',
+          newOrder: newOrder
+        });
+      }).catch(function (error) {
+        res.status(400).json({
+          status: 'unsuccesful',
+          error: error
+        });
+        next();
+      });
     }
   }, {
     key: "findOrderById",
-    value: function findOrderById(id) {
-      var index = this.orders.findIndex(function (order) {
-        return order.id === id;
+    value: function findOrderById(req, res, next) {
+      return _order.default.findByPk(req.params.id).then(function (foundOrder) {
+        res.status(200).json({
+          status: 'successful',
+          foundOrder: foundOrder
+        });
+      }).catch(function (error) {
+        res.status(400).json({
+          status: 'unsuccesful',
+          error: error
+        });
+        next();
       });
-      return this.orders[index];
     }
   }, {
     key: "findOrderByIdAndUpdate",
-    value: function findOrderByIdAndUpdate(id, body) {
-      var foundOrder = this.findOrderById(id);
-      var newMeal = new _meal.default();
-      newMeal.id = body.meal.id;
-      newMeal.name = body.meal.name;
-      newMeal.price = body.meal.price;
-      newMeal.description = body.meal.description;
-      newMeal.currency = body.meal.currency;
-      newMeal.calories = body.meal.calories;
-      var updatedOrder = new _order.default();
-      updatedOrder.id = id;
-      updatedOrder.meal = newMeal;
-      updatedOrder.quantity = body.quantity;
-      updatedOrder.cost = updatedOrder.meal.price * updatedOrder.quantity;
-      updatedOrder.method = body.method;
-      updatedOrder.address = body.address;
-      var index = this.orders.findIndex(function (x) {
-        return x.id === foundOrder.id;
+    value: function findOrderByIdAndUpdate(req, res, next) {
+      return _order.default.update({
+        quantity: req.body.quantity,
+        cost: req.body.cost,
+        address: req.body.address,
+        resolved: req.body.resolved,
+        method: req.body.method,
+        MealId: req.body.MealId
+      }, {
+        where: {
+          id: req.params.id
+        }
+      }).then(function (updatedOrder) {
+        res.status(200).json({
+          status: 'successful',
+          updatedOrder: updatedOrder
+        });
+      }).catch(function (error) {
+        res.status(400).json({
+          status: 'unsuccesful',
+          error: error
+        });
+        next();
       });
-      this.orders[index] = updatedOrder;
-      return {
-        message: 'The order was updated',
-        updatedOrder: updatedOrder
-      };
     }
   }, {
     key: "findOrderByIdAndDelete",
-    value: function findOrderByIdAndDelete(id) {
-      var foundOrder = this.findOrderById(id);
-      var index = this.orders.findIndex(function (x) {
-        return x.id === foundOrder.id;
+    value: function findOrderByIdAndDelete(req, res, next) {
+      return _order.default.destroy({
+        where: {
+          id: req.params.id
+        }
+      }).then(function (deletedOrder) {
+        res.status(200).json({
+          status: 'successful',
+          deletedOrder: deletedOrder
+        });
+      }).catch(function (error) {
+        res.status(400).json({
+          status: 'unsuccesful',
+          error: error
+        });
+        next();
       });
-      this.orders.splice(index, 1);
-      return {
-        message: 'An order was deleted'
-      };
     }
   }]);
 

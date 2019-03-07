@@ -5,19 +5,48 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+var _sequelize = _interopRequireDefault(require("sequelize"));
 
-var meal = function meal(id, name, image, price, calories, description, currency) {
-  _classCallCheck(this, meal);
+var _index = require("./index");
 
-  this.id = id;
-  this.name = name;
-  this.image = image;
-  this.price = price;
-  this.calories = calories;
-  this.description = description;
-  this.currency = currency;
-};
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var _default = meal;
+var Meal = _index.db.define('Meal', {
+  id: {
+    allowNull: false,
+    autoIncrement: true,
+    primaryKey: true,
+    type: _sequelize.default.INTEGER
+  },
+  createdAt: {
+    allowNull: false,
+    type: _sequelize.default.DATE
+  },
+  updatedAt: {
+    allowNull: false,
+    type: _sequelize.default.DATE
+  },
+  name: {
+    type: _sequelize.default.STRING,
+    allowNull: false
+  },
+  price: {
+    type: _sequelize.default.INTEGER,
+    allowNull: false
+  },
+  calories: {
+    type: _sequelize.default.STRING
+  },
+  description: {
+    type: _sequelize.default.TEXT
+  },
+  image: {
+    type: _sequelize.default.STRING
+  },
+  currency: {
+    type: _sequelize.default.STRING
+  }
+});
+
+var _default = Meal;
 exports.default = _default;

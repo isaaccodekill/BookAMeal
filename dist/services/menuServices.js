@@ -9,6 +9,8 @@ var _menu = _interopRequireDefault(require("../models/menu"));
 
 var _meal = _interopRequireDefault(require("../models/meal"));
 
+var _caterer = _interopRequireDefault(require("../models/caterer"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -20,60 +22,71 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 var menuService =
 /*#__PURE__*/
 function () {
-  function menuService(chef) {
+  function menuService() {
     _classCallCheck(this, menuService);
-
-    this.menu = new _menu.default();
-    this.menu.chef = chef;
-    this.menu.date = new Date().toLocaleDateString();
-    this.menu.mealOptions = [];
   }
 
-  _createClass(menuService, [{
+  _createClass(menuService, null, [{
     key: "getMenu",
-    value: function getMenu() {
-      var availableMenu = this.menu;
-      return availableMenu;
+    value: function getMenu(req, res, next) {
+      _menu.default.findAll().then(function (menu) {
+        res.status(200).json({
+          status: 'successful',
+          menu: menu[0]
+        });
+      }).catch(function (error) {
+        res.status(400).json({
+          status: 'unsuccesful',
+          error: error
+        });
+        next();
+      });
     }
   }, {
     key: "createAndSaveMenu",
-    value: function createAndSaveMenu(body) {
-      if (!body.mealOptions || body.mealOptions.length === 0) {
-        return 'Cannot create an empty menu';
-      }
-
-      var newMeals = body.mealOptions.map(function (meal) {
-        var newMeal = new _meal.default();
-        newMeal.id = meal.id;
-        newMeal.price = meal.price;
-        newMeal.description = meal.description;
-        newMeal.name = meal.name;
-        newMeal.image = meal.image;
-        newMeal.currency = meal.currency;
-        return newMeal;
+    value: function createAndSaveMenu(req, res, next) {
+      return _menu.default.create({
+        // chefId: req.user.id,
+        MenuItems: req.body.MenuItems
+      }, {
+        include: [{
+          model: _caterer.default
+        }]
+      }).then(function (menu) {
+        res.status(200).json({
+          status: 'successful',
+          menu: menu
+        });
+      }).catch(function (error) {
+        res.status(400).json({
+          status: 'unsuccesful',
+          error: error
+        });
+        next();
       });
-      this.menu.mealOptions = newMeals;
-      this.menu.chef = body.chef;
-      this.menu.date = new Date().toLocaleDateString();
-      return {
-        message: 'menu succesfully created'
-      };
     }
   }, {
     key: "editMenu",
-    value: function editMenu(body) {
-      var newMeals = body.mealOptions.map(function (meal) {
-        var newMeal = new _meal.default();
-        newMeal.id = meal.id;
-        newMeal.price = meal.price;
-        newMeal.description = meal.description;
-        newMeal.name = meal.name;
-        newMeal.image = newMeal.image;
-        newMeal.currency = meal.currency;
-        return newMeal;
+    value: function editMenu(req, res, next) {
+      return _menu.default.Update({
+        // chefId: req.user.id,
+        MenuItems: req.body.MenuItems
+      }, {
+        where: {
+          id: 1
+        }
+      }).then(function (menu) {
+        res.status(200).json({
+          status: 'successful',
+          menu: menu
+        });
+      }).catch(function (error) {
+        res.status(400).json({
+          status: 'unsuccesful',
+          error: error
+        });
+        next();
       });
-      this.menu.mealOptions = newMeals;
-      return 'The menu was edited';
     }
   }]);
 
