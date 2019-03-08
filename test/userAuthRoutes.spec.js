@@ -7,7 +7,7 @@ import app from '../API/app';
 const should = chai.should();
 /* eslint-enable no-unused-vars */
 chai.use(chaiHttp);
-describe('POST /ap1/v1/auth/', () => {
+describe('POST /api/v1/auth/', () => {
   it('/signup should succesfully register a user', (done) => {
     const User = {
       name: 'userZik',
@@ -16,7 +16,7 @@ describe('POST /ap1/v1/auth/', () => {
       phoneNumber: '09098876544',
     };
     chai.request(app)
-      .post('/ap1/v1/auth/signup')
+      .post('/api/v1/auth/signup')
       .send(User)
       .end((err, res) => {
         res.should.status(200);
@@ -29,14 +29,14 @@ describe('POST /ap1/v1/auth/', () => {
   });
 });
 
-describe('POST /ap1/v1/auth/', () => {
+describe('POST /api/v1/auth/', () => {
   it('/login should succesfully login a user', (done) => {
     const User = {
       email: 'myemail',
       password: 'minepassword',
     };
     chai.request(app)
-      .post('/ap1/v1/auth/login')
+      .post('/api/v1/auth/login')
       .send(User)
       .end((err, res) => {
         res.should.status(200);

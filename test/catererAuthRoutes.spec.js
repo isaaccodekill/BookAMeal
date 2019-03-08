@@ -14,7 +14,7 @@ before((done) => {
   });
 });
 
-describe('POST /ap1/v1/caterer/auth/', () => {
+describe('POST /api/v1/caterer/auth/', () => {
   it('/signup should succesfully register a caterer', (done) => {
     const Caterer = {
       name: 'chefZik',
@@ -24,7 +24,7 @@ describe('POST /ap1/v1/caterer/auth/', () => {
       restaurant: 'God saves',
     };
     chai.request(app)
-      .post('/ap1/v1/caterer/auth/signup')
+      .post('/api/v1/caterer/auth/signup')
       .send(Caterer)
       .end((err, res) => {
         res.should.status(200);
@@ -38,14 +38,14 @@ describe('POST /ap1/v1/caterer/auth/', () => {
   });
 });
 
-describe('POST /ap1/v1/caterer/auth/', () => {
+describe('POST /api/v1/caterer/auth/', () => {
   it('/login should succesfully login a caterer', (done) => {
     const Caterer = {
       email: 'myemail',
       password: 'minepassword',
     };
     chai.request(app)
-      .post('/ap1/v1/caterer/auth/login')
+      .post('/api/v1/caterer/auth/login')
       .send(Caterer)
       .end((err, res) => {
         res.should.status(200);
