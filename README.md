@@ -21,6 +21,11 @@ A web app made for ordering meals with the following features
 # Link to Website
 https://isaaccodekill.github.io/BookAMeal/UI/
 
+# Link to heroku app
+https://shielded-inlet-25276.herokuapp.com/
+
+# Link to Api docs
+https://shielded-inlet-25276.herokuapp.com/api/v1/documentation
 
 # Author
 Isaac Bello

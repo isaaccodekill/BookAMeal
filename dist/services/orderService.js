@@ -70,6 +70,13 @@ function () {
     key: "findOrderById",
     value: function findOrderById(req, res, next) {
       return _order.default.findByPk(req.params.id).then(function (foundOrder) {
+        if (!foundOrder) {
+          res.status(500).json({
+            status: 'un-succesful',
+            message: 'order Not found'
+          });
+        }
+
         res.status(200).json({
           status: 'successful',
           foundOrder: foundOrder

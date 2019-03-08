@@ -9,6 +9,8 @@ var _express = _interopRequireDefault(require("express"));
 
 var _bodyParser = _interopRequireDefault(require("body-parser"));
 
+var _swaggerUiExpress = _interopRequireDefault(require("swagger-ui-express"));
+
 var _mealRoutes = _interopRequireDefault(require("./routes/mealRoutes"));
 
 var _menuRoutes = _interopRequireDefault(require("./routes/menuRoutes"));
@@ -31,13 +33,17 @@ var _meal = _interopRequireDefault(require("./models/meal"));
 
 var _menu = _interopRequireDefault(require("./models/menu"));
 
+var _swagger = _interopRequireDefault(require("./swagger.json"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // route files
 // db file
 // models fiels
-// Order.belongsTo(User);
-// Order.belongsTo(Meal);
+_order.default.belongsTo(_user.default);
+
+_order.default.belongsTo(_meal.default);
+
 var app = (0, _express.default)();
 app.use(_bodyParser.default.urlencoded({
   extended: true
@@ -66,6 +72,7 @@ _user.default.hasMany(_order.default);
 app.get('/', function (req, res) {
   res.send('Welcome to isaac Bello\'s Book-A-Meal project');
 });
+app.use('/api/v1/documentation', _swaggerUiExpress.default.serve, _swaggerUiExpress.default.setup(_swagger.default));
 app.use('/api/v1/meals', _mealRoutes.default);
 app.use('/api/v1/menu', _menuRoutes.default);
 app.use('/api/v1/orders', _orderRoutes.default);
