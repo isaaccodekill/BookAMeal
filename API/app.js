@@ -1,6 +1,6 @@
 import express from 'express';
 import bodyparser from 'body-parser';
-
+import swaggerUi from 'swagger-ui-express';
 // route files
 import mealRoutes from './routes/mealRoutes';
 import menuRoutes from './routes/menuRoutes';
@@ -18,8 +18,10 @@ import Caterer from './models/caterer';
 import Meal from './models/meal';
 import Menu from './models/menu';
 
-// Order.belongsTo(User);
-// Order.belongsTo(Meal);
+import swaggerDocument from './swagger.json';
+
+Order.belongsTo(User);
+Order.belongsTo(Meal);
 
 const app = express();
 app.use(bodyparser.urlencoded({ extended: true }));
@@ -50,6 +52,7 @@ app.get('/', (req, res) => {
   res.send('Welcome to isaac Bello\'s Book-A-Meal project');
 });
 
+app.use('/api/v1/documentation', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use('/api/v1/meals', mealRoutes);
 app.use('/api/v1/menu', menuRoutes);
 app.use('/api/v1/orders', orderRoutes);

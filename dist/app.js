@@ -75,6 +75,7 @@ var PORT = process.env.PORT || 5500;
 
 _index.db.sync().then(function () {
   console.log('DB connected');
+  app.emit('appStarted');
   app.listen(PORT);
 }).catch(function (err) {
   console.log(err);

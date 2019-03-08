@@ -1,0 +1,650 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "version": "1.0.0",
+      "title": "book_a_meal",
+      "description": "An app to book a meal",
+      "license": {
+        "name": "MIT",
+        "url": "https://opensource.org/licenses/MIT"
+      },
+      "contact": {
+        "email": "isaacbello3200@gmail.com",
+        "gitRepo": "git+https://github.com/isaaccodekill"
+      }
+    },
+    "tags": [
+      {
+        "name": "Users",
+        "description": "User Api Endpoints"
+      },
+      {
+        "name": "Caterers",
+        "description": "Caterer Api endpoints"
+      },
+      {
+        "name": "Meals",
+        "description": "Meal Api Endpoints"
+      },
+      {
+        "name": "Menus",
+        "description": "Menu Api Endpoints"
+      },
+      {
+        "name": "Orders",
+        "description": "Order Api Endpoints"
+      }
+    ],
+    "schemes": [
+      "http"
+    ],
+    "consumes": [
+      "application/json",
+      "application/x-www-form-urlencoded"
+    ],
+    "produces": [
+      "application/json"
+    ],
+    "paths": {
+      "/api/v1/auth/signup": {
+        "post": {
+          "tags": [
+            "Users"
+          ],
+          "description": "Register User",
+          "requestBody": {
+            "description": "Input Data Format",
+            "content": {
+              "application/x-www-form-urlencoded": {
+                "schema": {
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "description": "User name"
+                    },
+                    "email": {
+                      "type": "string",
+                      "description": "User Email"
+                    },
+                    "phoneNumber": {
+                      "type": "number",
+                      "description": "User number"
+                    },
+                    "password": {
+                      "type": "string",
+                      "description": "User password"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "400": {
+              "description": "User Registration Error"
+            },
+            "500": {
+                "description": "User Already Exists"
+              },
+            "200": {
+              "description": "User successfully registered"
+            }
+          }
+        }
+      },
+      "/api/v1/auth/login": {
+        "post": {
+          "tags": [
+            "Users"
+          ],
+          "description": "User Login Route",
+          "requestBody": {
+            "description": "Input Data Format",
+            "content": {
+              "application/x-www-form-urlencoded": {
+                "schema": {
+                  "properties": {
+                    "email": {
+                      "type": "string",
+                      "description": "User email"
+                    },
+                    "password": {
+                      "type": "string",
+                      "description": "User password"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "400": {
+              "description": "User Login  Error"
+            },
+            "500": {
+              "description": "User Does Not Exist"
+            },
+            "200": {
+              "description": "User Logged In"
+            }
+          }
+        }
+      },
+      "/api/v1/caterer/auth/signup": {
+        "post": {
+          "tags": [
+            "Caterers"
+          ],
+          "description": "Register As a Caterer",
+          "requestBody": {
+            "description": "Input Data Format",
+            "content": {
+              "application/x-www-form-urlencoded": {
+                "schema": {
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "description": "Name"
+                    },
+                    "email": {
+                      "type": "string",
+                      "description": "Email Address"
+                    },
+                    "phoneNumber": {
+                      "type": "number",
+                      "description": "Phone Number"
+                    },
+                    "restaurant": {
+                      "type": "string",
+                      "description": "Name of Restaurant"
+                    },
+                    "password": {
+                      "type": "string",
+                      "description": "Password "
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "400": {
+              "description": "Caterer Registration error"
+            },
+            "500": {
+              "description": "Caterer registeration successful"
+            },
+            "201": {
+              "description": "Caterer  registered"
+            }
+          }
+        }
+      },
+      "/api/v1/caterer/auth/login": {
+        "post": {
+          "tags": [
+            "Caterers"
+          ],
+          "description": "Log In a Caterer",
+          "requestBody": {
+            "description": "Input Data Format",
+            "content": {
+              "application/x-www-form-urlencoded": {
+                "schema": {
+                  "properties": {
+                    "email": {
+                      "type": "string",
+                      "description": "Email"
+                    },
+                    "password": {
+                      "type": "string",
+                      "description": "Password"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "400": {
+              "description": "Caterer login error"
+            },
+            "500": {
+              "description": "Caterer Not found"
+            },
+            "200": {
+              "description": "Caterer Logged In"
+            }
+          }
+        }
+      },
+      "/api/v1/meals/": {
+        "get": {
+          "summary": "Get all meals for logged in caterer",
+          "tags": [
+            "Meals"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "403": {
+              "description": "Not Authorized"
+            },
+            "200": {
+              "description": "Successful"
+            }
+          },
+          "security": [
+            {
+              "JWT": []
+            }
+          ]
+        },
+        "post": {
+          "summary": "Add a New Meal",
+          "tags": [
+            "Meals"
+          ],
+          "requestBody": {
+            "description": "Input Data Format",
+            "content": {
+              "multipart/form-data": {
+                "schema": {
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "description": "food name"
+                    },
+                    "price": {
+                      "type": "number",
+                      "description": "Price of new Meal"
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "Say Something about this meal"
+                    },
+                    "calories": {
+                        "type": "string",
+                        "description": "Food Calorie content"
+                    },
+                    "currency": {
+                        "type": "string",
+                        "description": "Currency accepted"
+                    },
+                    "image": {
+                      "type": "string",
+                      "format": "binary",
+                      "description": "Food Image"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "403": {
+              "description": "Forbidden"
+            },
+            "400": {
+              "description": "Error"
+            },
+            "200": {
+              "description": "New Meal Created"
+            }
+          },
+          "security": [
+            {
+              "JWT": []
+            }
+          ]
+        }
+      },
+      "/api/v1/meals/{id}": {
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "meal id",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "delete": {
+          "summary": "Delete Meal",
+          "tags": [
+            "Meals"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "403": {
+              "description": "Forbidden"
+            },
+            "200": {
+              "description": "Meal Deleted"
+            }
+          },
+          "security": [
+            {
+              "JWT": []
+            }
+          ]
+        },
+        "put": {
+          "summary": "edit meal",
+          "tags": [
+            "Meals"
+          ],
+          "requestBody": {
+            "description": "Input Data Format",
+            "content": {
+              "multipart/form-data": {
+                "schema": {
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "description": "New meal name"
+                    },
+                    "price": {
+                      "type": "number",
+                      "description": "New meal price"
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "New meal description"
+                    },
+                    "calories": {
+                        "type": "string",
+                        "description": "New meal calorie content"
+                    },
+                    "currency": {
+                        "type": "string",
+                        "description": "New meal currency"
+                    },
+                    "image": {
+                      "type": "string",
+                      "format": "binary",
+                      "description": "New meal image"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "403": {
+              "description": "Forbidden"
+            },
+            "400": {
+              "description": "Bad request"
+            },
+            "500": {
+              "description": "Meal not found"
+            },
+            "200": {
+              "description": "Meal Updated"
+            }
+          },
+          "security": [
+            {
+              "JWT": []
+            }
+          ]
+        }
+      },
+      "/api/v1/menu/": {
+        "get": {
+          "summary": "Get menu",
+          "tags": [
+            "Menus"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "403": {
+              "description": "Forbidden"
+            },
+            "200": {
+              "description": "All Menus Retrieved"
+            }
+          },
+          "security": [
+            {
+              "JWT": []
+            }
+          ]
+        },
+        "post": {
+          "summary": "Create Menu with meal ids",
+          "tags": [
+            "Menus"
+          ],
+          "requestBody": {
+            "description": "Input Data Format",
+            "content": {
+              "application/x-www-form-urlencoded": {
+                "schema": {
+                  "properties": {
+                    "MenuItems": {
+                      "type": "array",
+                      "description": "Array of meal id's to be added"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "403": {
+              "description": "Forbidden"
+            },
+            "400": {
+              "description": "Bad request"
+            },
+            "200": {
+              "description": "Meal Added to Menu"
+            }
+          },
+          "security": [
+            {
+              "JWT": []
+            }
+          ]
+        }
+      },
+      "/api/v1/orders": {
+        "get": {
+          "summary": "Get all orders",
+          "tags": [
+            "Orders"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "403": {
+              "description": "Forbidden"
+            },
+            "200": {
+              "description": "Successful"
+            }
+          },
+          "security": [
+            {
+              "JWT": []
+            }
+          ]
+        },
+        "post": {
+          "summary": "Add Meal to OrderItems of Logged In User in the system",
+          "tags": [
+            "Orders"
+          ],
+          "requestBody": {
+            "description": "Input Data Format",
+            "content": {
+              "application/x-www-form-urlencoded": {
+                "schema": {
+                  "properties": {
+                    "mealId": {
+                      "type": "number",
+                      "description": "meal id"
+                    },
+                    "quantity": {
+                      "type": "number",
+                      "description": "Quantity of Meal to order"
+                    },
+                    "method": {
+                        "type": "string",
+                        "description": "Method of meal recieval"
+                    },
+                    "cost": {
+                        "type": "number",
+                        "description": "Final cost"
+                    },
+                    "resolved": {
+                        "type": "boolean",
+                        "description": "Order state"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "403": {
+              "description": "Forbidden"
+            },
+            "400": {
+              "description": "Bad request"
+            },
+            "200": {
+              "description": "Meal Added to Order Items"
+            }
+          },
+          "security": [
+            {
+              "JWT": []
+            }
+          ]
+        }
+      },
+      "/api/v1/orders/{orderId}": {
+        "parameters": [
+          {
+            "name": "orderId",
+            "in": "path",
+            "required": true,
+            "description": "Order ID",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "put": {
+          "summary": "Update Order Item with give ID",
+          "tags": [
+            "Orders"
+          ],
+          "requestBody": {
+            "description": "Input Data Format",
+            "content": {
+              "application/x-www-form-urlencoded": {
+                "schema": {
+                  "properties": {
+                    "mealId": {
+                        "type": "number",
+                        "description": "meal id"
+                      },
+                      "quantity": {
+                        "type": "number",
+                        "description": "Quantity of Meal to order"
+                      },
+                      "method": {
+                          "type": "string",
+                          "description": "Method of meal recieval"
+                      },
+                      "cost": {
+                          "type": "number",
+                          "description": "Final cost"
+                      },
+                      "resolved": {
+                          "type": "boolean",
+                          "description": "Order state"
+                      }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "responses": {
+            "403": {
+              "description": "Forbidden"
+            },
+            "400": {
+              "description": "Bad request"
+            },
+            "500": {
+              "description": "Order not found"
+            },
+            "200": {
+              "description": "Order Updated"
+            }
+          },
+          "security": [
+            {
+              "JWT": []
+            }
+          ]
+        }
+      }
+    },
+    "components": {
+      "securitySchemes": {
+        "JWT": {
+          "type": "apiKey",
+          "description": "JWT token is received after registering\/login, input format: \"Bearer \\<token\\>\"",
+          "name": "Authorization",
+          "in": "header"
+        }
+      }
+    }
+  }

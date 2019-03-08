@@ -34,11 +34,6 @@ var models = {
   Caterer: Caterer,
   Meal: Meal,
   Menu: Menu
-}; // Object.keys(models).forEach((key) => {
-//   if ('associate' in models[key]) {
-//     models[key].associate(models);
-//   }
-// });
-
+};
 var _default = models;
 exports.default = _default;

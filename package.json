@@ -9,7 +9,8 @@
     "dev": "nodemon --exec babel-node ./API/app.js",
     "clean": "rm -rf ./dist",
     "build-server": "babel ./API -d ./dist --ignore ./node_modules/,./dist",
-    "build": "npm run clean && npm run build-server",
+    "build": "npm run clean && npm run build-server && npm run copySwaggerDocs",
+    "copySwaggerDocs": "cat ./API/swagger.json >> ./build/swagger.json",
     "generate-lcov": "nyc report --reporter=text-lcov > lcov.info",
     "coveralls-coverage": "coveralls < lcov.info",
     "codeclimate-coverage": "codeclimate-test-reporter < lcov.info",
@@ -34,7 +35,8 @@
     "jsonwebtoken": "^8.5.0",
     "pg": "^7.8.1",
     "pg-hstore": "^2.3.2",
-    "sequelize": "^4.42.1"
+    "sequelize": "^4.42.1",
+    "swagger-ui-express": "^4.0.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",

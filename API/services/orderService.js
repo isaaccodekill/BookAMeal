@@ -47,6 +47,12 @@ class orderServices {
   static findOrderById(req, res, next) {
     return Order.findByPk(req.params.id)
       .then((foundOrder) => {
+        if (!foundOrder) {
+          res.status(500).json({
+            status: 'un-succesful',
+            message: 'order Not found',
+          });
+        }
         res.status(200).json({
           status: 'successful',
           foundOrder,
