@@ -3,7 +3,6 @@ import joi from 'joi';
 class MealValidation {
   static validateMenuCreate(req, res, next) {
     const schema = joi.object().keys({
-      // chefId: joi.number().required(),
       MenuItems: joi.array().items(joi.number()),
     });
     joi.validate(req.body, schema, (error, value) => {
@@ -18,7 +17,6 @@ class MealValidation {
 
   static validateMenuEdit(req, res, next) {
     const schema = joi.object().keys({
-    // chefId: joi.number().required(),
       MenuItems: joi.array().items(joi.number()),
     });
     joi.validate(req.body, schema, (error, value) => {

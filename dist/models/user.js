@@ -41,6 +41,9 @@ var User = _index.db.define('User', {
   updatedAt: {
     allowNull: false,
     type: _sequelize.default.DATE
+  },
+  savedCaterers: {
+    type: _sequelize.default.ARRAY(_sequelize.default.INTEGER)
   }
 });
 

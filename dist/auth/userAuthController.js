@@ -35,30 +35,43 @@ function () {
     key: "Register",
     // authentication functions
     value: function Register(req, res) {
-      var hashedPassword = _bcryptjs.default.hashSync(req.body.password, 10);
+      _user.default.findOne({
+        where: {
+          email: req.body.email
+        }
+      }).then(function (existingsUser) {
+        if (existingsUser) {
+          res.status(203).json({
+            message: 'unsuccessful registration',
+            error: 'user with that email already exists'
+          });
+        } else {
+          var hashedPassword = _bcryptjs.default.hashSync(req.body.password, 10);
 
-      _user.default.create({
-        name: req.body.name,
-        email: req.body.email,
-        phoneNumber: req.body.phoneNumber,
-        password: hashedPassword
-      }).then(function (user) {
-        var token = _jsonwebtoken.default.sign({
-          id: user.id,
-          isUser: true
-        }, process.env.SECRET, {
-          expiresIn: 86400
-        });
+          _user.default.create({
+            name: req.body.name,
+            email: req.body.email,
+            phoneNumber: req.body.phoneNumber,
+            password: hashedPassword
+          }).then(function (user) {
+            var token = _jsonwebtoken.default.sign({
+              id: user.id,
+              isUser: true
+            }, process.env.SECRET, {
+              expiresIn: 86400
+            });
 
-        return res.status(200).json({
-          message: 'User Registered',
-          token: token
-        });
-      }).catch(function (error) {
-        return res.status(500).json({
-          message: 'unsucessfull',
-          error: error
-        });
+            return res.status(200).json({
+              message: 'User Registered',
+              token: token
+            });
+          }).catch(function (error) {
+            return res.status(500).json({
+              message: 'unsucessfull',
+              error: error
+            });
+          });
+        }
       });
     }
   }, {
@@ -91,6 +104,7 @@ function () {
           expiresIn: 86400
         });
 
+        req.userId = user.id;
         return res.status(200).json({
           message: 'User Signed In',
           token: token

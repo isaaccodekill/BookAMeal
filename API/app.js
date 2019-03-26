@@ -7,6 +7,7 @@ import menuRoutes from './routes/menuRoutes';
 import orderRoutes from './routes/orderRoutes';
 import catererRoutes from './routes/catererRoutes';
 import userRoutes from './routes/userRoutes';
+import userActionRoutes from './routes/userActions';
 
 // db file
 import { db } from './models/index';
@@ -58,9 +59,10 @@ app.use('/api/v1/menu', menuRoutes);
 app.use('/api/v1/orders', orderRoutes);
 app.use('/api/v1/caterer/auth', catererRoutes);
 app.use('/api/v1/auth', userRoutes);
+app.use('/api/v1/userActions', userActionRoutes);
 
 const PORT = process.env.PORT || 5500;
-db.sync()
+db.sync({force: true})
   .then(() => {
     console.log('DB connected');
     app.emit('appStarted');

@@ -5,9 +5,10 @@ class orderServices {
   static getOrders(req, res, next) {
     return Order.findAll({ include: [Meal] })
       .then((Orders) => {
+        const orderList = Orders.filter(order => order.Meal.CatererId === req.caterer.id);
         res.status(200).json({
           status: 'successful',
-          Orders,
+          orderList,
         });
       })
       .catch((error) => {
@@ -19,7 +20,8 @@ class orderServices {
       });
   }
 
-  static createAndSaveOrder(req, res, next) {
+  static createAndSaveOrder(req, res) {
+    req.body.userId = req.user.id;
     return Order.create({
       quantity: req.body.quantity,
       cost: req.body.cost,
@@ -27,7 +29,7 @@ class orderServices {
       resolved: req.body.resolved,
       method: req.body.method,
       MealId: req.body.MealId,
-      // UserId: req.user.id,
+      UserId: req.body.userId,
     })
       .then((newOrder) => {
         res.status(200).json({
@@ -40,11 +42,10 @@ class orderServices {
           status: 'unsuccesful',
           error,
         });
-        next();
       });
   }
 
-  static findOrderById(req, res, next) {
+  static findOrderById(req, res) {
     return Order.findByPk(req.params.id)
       .then((foundOrder) => {
         if (!foundOrder) {
@@ -52,22 +53,23 @@ class orderServices {
             status: 'un-succesful',
             message: 'order Not found',
           });
+        } else {
+          res.status(200).json({
+            status: 'successful',
+            foundOrder,
+          });
         }
-        res.status(200).json({
-          status: 'successful',
-          foundOrder,
-        });
       })
       .catch((error) => {
         res.status(400).json({
           status: 'unsuccesful',
           error,
         });
-        next();
       });
   }
 
-  static findOrderByIdAndUpdate(req, res, next) {
+  static findOrderByIdAndUpdate(req, res) {
+    console.log("order Body", req.body)
     return Order.update({
       quantity: req.body.quantity,
       cost: req.body.cost,
@@ -87,11 +89,10 @@ class orderServices {
           status: 'unsuccesful',
           error,
         });
-        next();
       });
   }
 
-  static findOrderByIdAndDelete(req, res, next) {
+  static findOrderByIdAndDelete(req, res) {
     return Order.destroy({ where: { id: req.params.id } })
       .then((deletedOrder) => {
         res.status(200).json({
@@ -104,7 +105,6 @@ class orderServices {
           status: 'unsuccesful',
           error,
         });
-        next();
       });
   }
 }

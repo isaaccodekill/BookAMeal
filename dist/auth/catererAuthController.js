@@ -34,37 +34,50 @@ function () {
   _createClass(CatererAuth, null, [{
     key: "Register",
     // authentication functions
-    value: function Register(req, res, next) {
-      var hashedPassword = _bcryptjs.default.hashSync(req.body.password, 10);
+    value: function Register(req, res) {
+      _caterer.default.findOne({
+        where: {
+          email: req.body.email
+        }
+      }).then(function (existingCaterer) {
+        if (existingCaterer) {
+          res.status(203).json({
+            message: 'Registeration error',
+            error: 'A caterer with that email already exists in db'
+          });
+        } else {
+          var hashedPassword = _bcryptjs.default.hashSync(req.body.password, 10);
 
-      _caterer.default.create({
-        name: req.body.name,
-        email: req.body.email,
-        password: hashedPassword,
-        phoneNumber: req.body.phoneNumber,
-        restaurant: req.body.restaurant
-      }).then(function (caterer) {
-        var token = _jsonwebtoken.default.sign({
-          id: caterer.id,
-          isCaterer: true
-        }, process.env.SECRET, {
-          expiresIn: 86400
-        });
+          _caterer.default.create({
+            name: req.body.name,
+            email: req.body.email,
+            password: hashedPassword,
+            phoneNumber: req.body.phoneNumber,
+            restaurant: req.body.restaurant
+          }).then(function (caterer) {
+            var token = _jsonwebtoken.default.sign({
+              id: caterer.id,
+              isCaterer: true
+            }, process.env.SECRET, {
+              expiresIn: 86400
+            });
 
-        return res.status(200).json({
-          message: 'successfull',
-          token: token
-        });
-      }).catch(function (error) {
-        return res.status(500).json({
-          message: 'unsucessfull',
-          error: error
-        });
+            return res.status(200).json({
+              message: 'successfull',
+              token: token
+            });
+          }).catch(function (error) {
+            return res.status(500).json({
+              message: 'unsucessfull',
+              error: error
+            });
+          });
+        }
       });
     }
   }, {
     key: "Login",
-    value: function Login(req, res, next) {
+    value: function Login(req, res) {
       _caterer.default.findOne({
         where: {
           email: req.body.email
@@ -87,11 +100,13 @@ function () {
         }
 
         var token = _jsonwebtoken.default.sign({
-          id: caterer.id
+          id: caterer.id,
+          isCaterer: true
         }, process.env.SECRET, {
           expiresIn: 86400
         });
 
+        req.catererId = caterer.id;
         return res.status(200).json({
           message: 'successfull',
           token: token

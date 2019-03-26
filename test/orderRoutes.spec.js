@@ -14,7 +14,9 @@ const should = chai.should();
 /* eslint-enable no-unused-vars */
 
 let CatererIdAccessible;
+let UserIdAccessible;
 let validMealId;
+let OrderId;
 
 before((done) => {
   Caterer.create({
@@ -36,14 +38,23 @@ before((done) => {
       })
         .then((meal) => {
           validMealId = meal.id;
-          done();
+          User.create({
+            name: 'zikUser',
+            email: 'newuser@gmail.com',
+            password: 'hashedPassword', // dont try this at home
+            phoneNumber: '12345678901',
+          })
+            .then((user) => {
+              UserIdAccessible = user.id;
+              done();
+            });
         });
     });
 });
 
 after((done) => {
   Caterer.destroy({ where: { email: 'newemail2@gmail.com' } })
-    .then((res) => {
+    .then(() => {
       User.destroy({ where: { email: 'newuser@gmail.com' } });
       Meal.destroy({ where: { id: validMealId } });
       done();
@@ -70,19 +81,22 @@ describe('GET /api/v1/orders', () => {
 });
 
 describe('POST /api/v1/orders', () => {
-  it('should create and save a new order', (done) => {
+  it('should add a caterer to user\'s favourites', (done) => {
+    const Token = jwt.sign({ id: UserIdAccessible, isUser: true }, process.env.SECRET,
+      { expiresIn: 86400 });
     chai.request(app)
       .post('/api/v1/orders')
+      .set('Authorization', `Bearer ${Token}`)
       .send({
         cost: 2000,
-        MealId: 2,
+        MealId: validMealId,
         quantity: 2,
         method: 'takeout',
         address: 'address',
         resolved: false,
       })
       .end((err, res) => {
-        console.log(validMealId);
+        OrderId = res.body.newOrder.id;
         res.should.status(200);
         res.body.should.be.a('object');
         res.body.should.have.property('status');
@@ -96,17 +110,21 @@ describe('POST /api/v1/orders', () => {
 
 describe('PUT /api/v1/orders/:id', () => {
   it('it should update the order with the id', (done) => {
+    const Token = jwt.sign({ id: UserIdAccessible, isUser: true }, process.env.SECRET,
+      { expiresIn: 86400 });
     const body = {
       cost: 2000,
-      MealId: 2,
+      MealId: validMealId,
       quantity: 2,
       method: 'takeout',
       address: 'address',
       resolved: 'false',
+      UserId: UserIdAccessible,
     };
 
     chai.request(app)
-      .put('/api/v1/orders/1')
+      .put(`/api/v1/orders/${OrderId}`)
+      .set('Authorization', `Bearer ${Token}`)
       .send(body)
       .end((err, res) => {
         res.should.status(200);
@@ -121,8 +139,11 @@ describe('PUT /api/v1/orders/:id', () => {
 
 describe('DELETE /api/v1/orders/:id', () => {
   it('should delete the found order', (done) => {
+    const Token = jwt.sign({ id: UserIdAccessible, isUser: true }, process.env.SECRET,
+      { expiresIn: 86400 });
     chai.request(app)
-      .delete('/api/v1/orders/1')
+      .delete(`/api/v1/orders/${OrderId}`)
+      .set('Authorization', `Bearer ${Token}`)
       .end((err, res) => {
         res.should.status(200);
         res.body.should.have.property('status');

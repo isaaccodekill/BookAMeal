@@ -2,17 +2,10 @@ import joi from 'joi';
 
 class orderValidation {
   static validateorderAddition(req, res, next) {
-    // const mealObjSchema = joi.object().keys({
-    //   name: joi.string().required(),
-    //   price: joi.number().required(),
-    //   calories: joi.string().required(),
-    //   description: joi.string().required(),
-    //   currency: joi.string().required(),
-    //   image: joi.string().required(),
-    // });
+   
     const schema = joi.object().keys({
       MealId: joi.number().required(),
-      // UserId: joi.number().required(),
+      UserId: joi.number(),
       address: joi.string().required(),
       method: joi.string().required(),
       quantity: joi.number().required(),
@@ -32,6 +25,7 @@ class orderValidation {
   static validateOrderUpdate(req, res, next) {
     const schema = joi.object().keys({
       MealId: joi.number().required(),
+      UserId: joi.number().required(),
       address: joi.string().required(),
       method: joi.string().required(),
       quantity: joi.number().required(),

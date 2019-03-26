@@ -31,7 +31,8 @@ function () {
         calories: _joi.default.string().required(),
         description: _joi.default.string().required(),
         currency: _joi.default.string().required(),
-        image: _joi.default.string().required()
+        image: _joi.default.string().required(),
+        CatererId: _joi.default.number()
       });
 
       _joi.default.validate(req.body, schema, function (error, value) {

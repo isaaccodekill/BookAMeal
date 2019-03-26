@@ -6,6 +6,8 @@ import MealValidation from '../middleware/meal';
 
 import Authorization from '../auth/authorization';
 
+import Validation from '../validations/validate';
+
 const router = express.Router();
 
 router.route('/')
@@ -15,9 +17,9 @@ router.route('/')
 
 router.route('/:id')
   .get(Authorization.checkForToken, Authorization.verifyCaterer, MealServices.findMealById)
-  .put(Authorization.checkForToken, Authorization.verifyCaterer,
+  .put(Authorization.checkForToken, Authorization.verifyCaterer, Validation.validateMealCreator,
     MealValidation.validateMealUpdate, MealServices.findMealByIdAndUpdate)
-  .delete(Authorization.checkForToken, Authorization.verifyCaterer,
+  .delete(Authorization.checkForToken, Authorization.verifyCaterer, Validation.validateMealCreator,
     MealServices.findMealByIdAndDelete);
 
 export default router;

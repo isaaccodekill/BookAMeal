@@ -10,32 +10,42 @@ dotenv.config();
 class CatererAuth {
   // authentication functions
 
-  static Register(req, res, next) {
-    const hashedPassword = bcrypt.hashSync(req.body.password, 10);
-    Caterer.create({
-      name: req.body.name,
-      email: req.body.email,
-      password: hashedPassword,
-      phoneNumber: req.body.phoneNumber,
-      restaurant: req.body.restaurant,
-    })
-      .then((caterer) => {
-        const token = jwt.sign({ id: caterer.id, isCaterer: true }, process.env.SECRET,
-          { expiresIn: 86400 });
-        return res.status(200).json({
-          message: 'successfull',
-          token,
-        });
-      })
-      .catch((error) => {
-        return res.status(500).json({
-          message: 'unsucessfull',
-          error,
-        });
+  static Register(req, res) {
+    Caterer.findOne({ where: { email: req.body.email } })
+      .then((existingCaterer) => {
+        if (existingCaterer) {
+          res.status(203).json({
+            message: 'Registeration error',
+            error: 'A caterer with that email already exists in db',
+          });
+        } else {
+          const hashedPassword = bcrypt.hashSync(req.body.password, 10);
+          Caterer.create({
+            name: req.body.name,
+            email: req.body.email,
+            password: hashedPassword,
+            phoneNumber: req.body.phoneNumber,
+            restaurant: req.body.restaurant,
+          })
+            .then((caterer) => {
+              const token = jwt.sign({ id: caterer.id, isCaterer: true }, process.env.SECRET,
+                { expiresIn: 86400 });
+              return res.status(200).json({
+                message: 'successfull',
+                token,
+              });
+            })
+            .catch((error) => {
+              return res.status(500).json({
+                message: 'unsucessfull',
+                error,
+              });
+            });
+        }
       });
   }
 
-  static Login(req, res, next) {
+  static Login(req, res) {
     Caterer.findOne({ where: { email: req.body.email } })
       .then((caterer) => {
         if (!caterer) {
@@ -51,7 +61,9 @@ class CatererAuth {
             token: null,
           });
         }
-        const token = jwt.sign({ id: caterer.id }, process.env.SECRET, { expiresIn: 86400 });
+        const token = jwt.sign({ id: caterer.id, isCaterer: true }, process.env.SECRET,
+          { expiresIn: 86400 });
+        req.catererId = caterer.id;
         return res.status(200).json({
           message: 'successfull',
           token,

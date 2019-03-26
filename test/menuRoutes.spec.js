@@ -55,23 +55,6 @@ const should = chai.should();
 
 chai.use(chaiHttp);
 
-describe('GET /api/v1/menu', () => {
-  it('should return menu Object containing meal options array', (done) => {
-    // get jwt token
-    const Token = jwt.sign({ id: UserIdAccessible, isUser: true }, process.env.SECRET,
-      { expiresIn: 86400 });
-    chai.request(app)
-      .get('/api/v1/menu')
-      .set('Authorization', `Bearer ${Token}`)
-      .end((err, res) => {
-        res.should.have.status(200);
-        res.body.should.be.a('object');
-        res.body.status.should.equal('successful');
-        done();
-      });
-  });
-});
-
 describe('POST /api/v1/menu', () => {
   it('it should succesfully create a menu', (done) => {
     // get jwt token
@@ -91,6 +74,25 @@ describe('POST /api/v1/menu', () => {
       });
   });
 });
+
+
+describe('GET /api/v1/menu', () => {
+  it('should return menu Object containing meal options array', (done) => {
+    // get jwt token
+    const Token = jwt.sign({ id: UserIdAccessible, isUser: true }, process.env.SECRET,
+      { expiresIn: 86400 });
+    chai.request(app)
+      .get(`/api/v1/menu/${CatererIdAccessible}`)
+      .set('Authorization', `Bearer ${Token}`)
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.body.should.be.a('object');
+        res.body.status.should.equal('successful');
+        done();
+      });
+  });
+});
+
 
 describe('PUT /api/v1/menu', () => {
   it('should successfuly update the menu', (done) => {

@@ -5,8 +5,10 @@ import Authorization from '../auth/authorization';
 
 const router = express.Router();
 
+router.route('/:chefId')
+  .get(Authorization.checkForToken, Authorization.verifyUser, MenuServices.getMenu);
+
 router.route('/')
-  .get(Authorization.checkForToken, Authorization.verifyUser, MenuServices.getMenu)
   .post(Authorization.checkForToken, Authorization.verifyCaterer, MenuValidation.validateMenuCreate,
     MenuServices.createAndSaveMenu)
   .put(Authorization.checkForToken, Authorization.verifyCaterer, MenuValidation.validateMenuEdit,

@@ -3,7 +3,7 @@ import Meal from '../models/meal';
 
 class mealServices {
   static getAllmeals(req, res) {
-    return Meal.findAll()
+    return Meal.findAll({ where: { CatererId: req.caterer.id } })
       .then((meals) => {
         res.status(200).json({
           status: 'succesful',
@@ -19,6 +19,7 @@ class mealServices {
   }
 
   static createAndSave(req, res) {
+    req.body.CatererId = req.caterer.id;
     return Meal.create(req.body)
       .then((meal) => {
         res.status(200).json({
@@ -51,7 +52,8 @@ class mealServices {
   }
 
   static findMealByIdAndUpdate(req, res) {
-    return Meal.update(req.body, { where: { id: req.params.id } })
+    req.body.CatererId = req.caterer.id;
+    Meal.update(req.body, { where: { id: req.params.id } })
       .then((updatedMeal) => {
         res.status(200).json({
           status: 'successful',

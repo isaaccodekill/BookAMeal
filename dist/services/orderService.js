@@ -30,9 +30,12 @@ function () {
       return _order.default.findAll({
         include: [_meal.default]
       }).then(function (Orders) {
+        var orderList = Orders.filter(function (order) {
+          return order.Meal.CatererId === req.caterer.id;
+        });
         res.status(200).json({
           status: 'successful',
-          Orders: Orders
+          orderList: orderList
         });
       }).catch(function (error) {
         res.status(400).json({
@@ -44,15 +47,16 @@ function () {
     }
   }, {
     key: "createAndSaveOrder",
-    value: function createAndSaveOrder(req, res, next) {
+    value: function createAndSaveOrder(req, res) {
+      req.body.userId = req.user.id;
       return _order.default.create({
         quantity: req.body.quantity,
         cost: req.body.cost,
         address: req.body.address,
         resolved: req.body.resolved,
         method: req.body.method,
-        MealId: req.body.MealId // UserId: req.user.id,
-
+        MealId: req.body.MealId,
+        UserId: req.body.userId
       }).then(function (newOrder) {
         res.status(200).json({
           status: 'successful',
@@ -63,35 +67,34 @@ function () {
           status: 'unsuccesful',
           error: error
         });
-        next();
       });
     }
   }, {
     key: "findOrderById",
-    value: function findOrderById(req, res, next) {
+    value: function findOrderById(req, res) {
       return _order.default.findByPk(req.params.id).then(function (foundOrder) {
         if (!foundOrder) {
           res.status(500).json({
             status: 'un-succesful',
             message: 'order Not found'
           });
+        } else {
+          res.status(200).json({
+            status: 'successful',
+            foundOrder: foundOrder
+          });
         }
-
-        res.status(200).json({
-          status: 'successful',
-          foundOrder: foundOrder
-        });
       }).catch(function (error) {
         res.status(400).json({
           status: 'unsuccesful',
           error: error
         });
-        next();
       });
     }
   }, {
     key: "findOrderByIdAndUpdate",
-    value: function findOrderByIdAndUpdate(req, res, next) {
+    value: function findOrderByIdAndUpdate(req, res) {
+      console.log("order Body", req.body);
       return _order.default.update({
         quantity: req.body.quantity,
         cost: req.body.cost,
@@ -113,12 +116,11 @@ function () {
           status: 'unsuccesful',
           error: error
         });
-        next();
       });
     }
   }, {
     key: "findOrderByIdAndDelete",
-    value: function findOrderByIdAndDelete(req, res, next) {
+    value: function findOrderByIdAndDelete(req, res) {
       return _order.default.destroy({
         where: {
           id: req.params.id
@@ -133,7 +135,6 @@ function () {
           status: 'unsuccesful',
           error: error
         });
-        next();
       });
     }
   }]);

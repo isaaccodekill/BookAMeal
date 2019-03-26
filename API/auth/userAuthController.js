@@ -11,26 +11,36 @@ class UserAuth {
   // authentication functions
 
   static Register(req, res) {
-    const hashedPassword = bcrypt.hashSync(req.body.password, 10);
-    User.create({
-      name: req.body.name,
-      email: req.body.email,
-      phoneNumber: req.body.phoneNumber,
-      password: hashedPassword,
-    })
-      .then((user) => {
-        const token = jwt.sign({ id: user.id, isUser: true }, process.env.SECRET,
-          { expiresIn: 86400 });
-        return res.status(200).json({
-          message: 'User Registered',
-          token,
-        });
-      })
-      .catch((error) => {
-        return res.status(500).json({
-          message: 'unsucessfull',
-          error,
-        });
+    User.findOne({ where: { email: req.body.email } })
+      .then((existingsUser) => {
+        if (existingsUser) {
+          res.status(203).json({
+            message: 'unsuccessful registration',
+            error: 'user with that email already exists',
+          });
+        } else {
+          const hashedPassword = bcrypt.hashSync(req.body.password, 10);
+          User.create({
+            name: req.body.name,
+            email: req.body.email,
+            phoneNumber: req.body.phoneNumber,
+            password: hashedPassword,
+          })
+            .then((user) => {
+              const token = jwt.sign({ id: user.id, isUser: true }, process.env.SECRET,
+                { expiresIn: 86400 });
+              return res.status(200).json({
+                message: 'User Registered',
+                token,
+              });
+            })
+            .catch((error) => {
+              return res.status(500).json({
+                message: 'unsucessfull',
+                error,
+              });
+            });
+        }
       });
   }
 
@@ -51,6 +61,7 @@ class UserAuth {
           });
         }
         const token = jwt.sign({ id: user.id }, process.env.SECRET, { expiresIn: 86400 });
+        req.userId = user.id;
         return res.status(200).json({
           message: 'User Signed In',
           token,

@@ -26,7 +26,6 @@ function () {
     key: "validateMenuCreate",
     value: function validateMenuCreate(req, res, next) {
       var schema = _joi.default.object().keys({
-        // chefId: joi.number().required(),
         MenuItems: _joi.default.array().items(_joi.default.number())
       });
 
@@ -44,7 +43,6 @@ function () {
     key: "validateMenuEdit",
     value: function validateMenuEdit(req, res, next) {
       var schema = _joi.default.object().keys({
-        // chefId: joi.number().required(),
         MenuItems: _joi.default.array().items(_joi.default.number())
       });
 

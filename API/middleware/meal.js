@@ -9,6 +9,7 @@ class MealValidation {
       description: joi.string().required(),
       currency: joi.string().required(),
       image: joi.string().required(),
+      CatererId: joi.number(),
     });
     joi.validate(req.body, schema, (error, value) => {
       if (error !== null) {

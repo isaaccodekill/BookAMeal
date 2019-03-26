@@ -33,6 +33,10 @@
       {
         "name": "Orders",
         "description": "Order Api Endpoints"
+      },
+      {
+        "name": "UserActions",
+        "description": "User Actions Api Endpoints"
       }
     ],
     "schemes": [
@@ -420,7 +424,18 @@
           ]
         }
       },
-      "/api/v1/menu/": {
+      "/api/v1/menu/{id}": {
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "chef id",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
         "get": {
           "summary": "Get menu",
           "tags": [
@@ -434,7 +449,7 @@
               "description": "Forbidden"
             },
             "200": {
-              "description": "All Menus Retrieved"
+              "description": "Menu Retrieved"
             }
           },
           "security": [
@@ -442,7 +457,9 @@
               "JWT": []
             }
           ]
-        },
+        }
+      },
+      "/api/v1/menu/": {
         "post": {
           "summary": "Create Menu with meal ids",
           "tags": [
@@ -627,6 +644,163 @@
             },
             "200": {
               "description": "Order Updated"
+            }
+          },
+          "security": [
+            {
+              "JWT": []
+            }
+          ]
+        }
+      },
+      "/api/v1/userActions/getAllCaterers":{
+        "get": {
+          "summary": "Get all Caterers",
+          "tags": [
+            "UserActions"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "403": {
+              "description": "Forbidden"
+            },
+            "200": {
+              "description": "Successful"
+            }
+          },
+          "security": [
+            {
+              "JWT": []
+            }
+          ]
+        }
+      },
+      "/api/v1/userActions/saveCaterer":{
+        "post": {
+          "summary": "Save Caterer to user's favourites",
+          "tags": [
+            "UserActions"
+          ],
+          "requestBody": {
+            "description": "Input Data Format",
+            "content": {
+              "application/x-www-form-urlencoded": {
+                "schema": {
+                  "properties": {
+                    "savedCaterers": {
+                        "type": "number",
+                        "description": "Order state"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "403": {
+              "description": "Forbidden"
+            },
+            "400": {
+              "description": "Bad request"
+            },
+            "200": {
+              "description": "Caterer saved to favourites"
+            }
+          },
+          "security": [
+            {
+              "JWT": []
+            }
+          ]
+        }
+      },
+      "/api/v1/userActions/getSavedCaterers": {
+        "get": {
+          "summary": "Get all saved Caterers",
+          "tags": [
+            "UserActions"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "403": {
+              "description": "Forbidden"
+            },
+            "200": {
+              "description": "Successful"
+            }
+          },
+          "security": [
+            {
+              "JWT": []
+            }
+          ]
+        }
+      },
+      "/api/v1/userActions/getOrderHistory":{
+        "get": {
+          "summary": "Get Order History",
+          "tags": [
+            "UserActions"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "403": {
+              "description": "Forbidden"
+            },
+            "200": {
+              "description": "Successful"
+            }
+          },
+          "security": [
+            {
+              "JWT": []
+            }
+          ]
+        }
+      },
+      "/api/v1/userActions/deleteSavedCaterer/{id}": {
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "chef id",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "post": {
+          "summary": "Delete Caterer from user's favourites",
+          "tags": [
+            "UserActions"
+          ],
+          "requestBody": {
+            "description": "Input Data Format",
+            "content": {}
+          },
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "403": {
+              "description": "Forbidden"
+            },
+            "400": {
+              "description": "Bad request"
+            },
+            "200": {
+              "description": "Caterer deleted from favourites"
             }
           },
           "security": [

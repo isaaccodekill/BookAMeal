@@ -25,17 +25,9 @@ function () {
   _createClass(orderValidation, null, [{
     key: "validateorderAddition",
     value: function validateorderAddition(req, res, next) {
-      // const mealObjSchema = joi.object().keys({
-      //   name: joi.string().required(),
-      //   price: joi.number().required(),
-      //   calories: joi.string().required(),
-      //   description: joi.string().required(),
-      //   currency: joi.string().required(),
-      //   image: joi.string().required(),
-      // });
       var schema = _joi.default.object().keys({
         MealId: _joi.default.number().required(),
-        // UserId: joi.number().required(),
+        UserId: _joi.default.number(),
         address: _joi.default.string().required(),
         method: _joi.default.string().required(),
         quantity: _joi.default.number().required(),
@@ -58,6 +50,7 @@ function () {
     value: function validateOrderUpdate(req, res, next) {
       var schema = _joi.default.object().keys({
         MealId: _joi.default.number().required(),
+        UserId: _joi.default.number().required(),
         address: _joi.default.string().required(),
         method: _joi.default.string().required(),
         quantity: _joi.default.number().required(),

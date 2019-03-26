@@ -32,6 +32,9 @@ const User = db.define('User', {
     allowNull: false,
     type: Sequelize.DATE,
   },
+  savedCaterers: {
+    type: Sequelize.ARRAY(Sequelize.INTEGER),
+  },
 });
 
 export default User;

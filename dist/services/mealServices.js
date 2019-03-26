@@ -25,7 +25,11 @@ function () {
   _createClass(mealServices, null, [{
     key: "getAllmeals",
     value: function getAllmeals(req, res) {
-      return _meal.default.findAll().then(function (meals) {
+      return _meal.default.findAll({
+        where: {
+          CatererId: req.caterer.id
+        }
+      }).then(function (meals) {
         res.status(200).json({
           status: 'succesful',
           meals: meals
@@ -40,6 +44,7 @@ function () {
   }, {
     key: "createAndSave",
     value: function createAndSave(req, res) {
+      req.body.CatererId = req.caterer.id;
       return _meal.default.create(req.body).then(function (meal) {
         res.status(200).json({
           status: 'successful',
@@ -70,7 +75,9 @@ function () {
   }, {
     key: "findMealByIdAndUpdate",
     value: function findMealByIdAndUpdate(req, res) {
-      return _meal.default.update(req.body, {
+      req.body.CatererId = req.caterer.id;
+
+      _meal.default.update(req.body, {
         where: {
           id: req.params.id
         }

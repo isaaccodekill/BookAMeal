@@ -21,6 +21,8 @@ var _catererRoutes = _interopRequireDefault(require("./routes/catererRoutes"));
 
 var _userRoutes = _interopRequireDefault(require("./routes/userRoutes"));
 
+var _userActions = _interopRequireDefault(require("./routes/userActions"));
+
 var _index = require("./models/index");
 
 var _order = _interopRequireDefault(require("./models/order"));
@@ -76,11 +78,14 @@ app.use('/api/v1/documentation', _swaggerUiExpress.default.serve, _swaggerUiExpr
 app.use('/api/v1/meals', _mealRoutes.default);
 app.use('/api/v1/menu', _menuRoutes.default);
 app.use('/api/v1/orders', _orderRoutes.default);
-app.use('/ap1/v1/caterer/auth', _catererRoutes.default);
-app.use('/ap1/v1/auth', _userRoutes.default);
+app.use('/api/v1/caterer/auth', _catererRoutes.default);
+app.use('/api/v1/auth', _userRoutes.default);
+app.use('/api/v1/userActions', _userActions.default);
 var PORT = process.env.PORT || 5500;
 
-_index.db.sync().then(function () {
+_index.db.sync({
+  force: true
+}).then(function () {
   console.log('DB connected');
   app.emit('appStarted');
   app.listen(PORT);

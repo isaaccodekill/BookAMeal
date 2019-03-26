@@ -19,29 +19,48 @@ class AuthorizationFlow {
     }
   }
 
-  static verifyCaterer(req, res, next) {
-    const decodedData = jwt.verify(req.token, process.env.SECRET);
-    if (!decodedData.isCaterer) {
-      res.status(403).json({
-        message: 'forbidden/UnAuthorized',
-        error: 'Not a caterer',
-      });
-    } else {
-      req.caterer = decodedData.caterer;
-      next();
+  static async verifyCaterer(req, res, next) {
+    try {
+      const decodedData = await jwt.verify(req.token, process.env.SECRET);
+      if (!decodedData.isCaterer) {
+        res.status(403).json({
+          message: 'forbidden/UnAuthorized',
+          error: 'Not a caterer',
+        });
+      } else {
+        req.caterer = decodedData;
+        next();
+      }
+    } catch (error) {
+      if (error.name === 'TokenExpiredError') {
+        res.status(403).json({
+          message: 'forbidden/UnAuthorized',
+          error: 'Token expired',
+        });
+      }
     }
   }
 
-  static verifyUser(req, res, next) {
-    const decodedData = jwt.verify(req.token, process.env.SECRET);
-    if (!decodedData.isUser) {
-      res.status(403).json({
-        message: 'forbidden/UnAuthorized',
-        error: 'Not a valid user',
-      });
-    } else {
-      req.user = decodedData.user;
-      next();
+  static async verifyUser(req, res, next) {
+    try {
+      const decodedData = await jwt.verify(req.token, process.env.SECRET);
+      console.log(decodedData)
+      if (!decodedData.isUser) {
+        res.status(403).json({
+          message: 'forbidden/UnAuthorized',
+          error: 'Not a valid user',
+        });
+      } else {
+        req.user = decodedData;
+        next();
+      }
+    } catch (error) {
+      if (error.name === 'TokenExpiredError') {
+        res.status(403).json({
+          message: 'forbidden/UnAuthorized',
+          error: 'Token expired',
+        });
+      }
     }
   }
 }

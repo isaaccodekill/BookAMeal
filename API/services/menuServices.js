@@ -1,12 +1,24 @@
 import Menu from '../models/menu';
 import Caterer from '../models/caterer';
+import Meal from '../models/meal';
+import populate from '../Extras/populate';
 
 class menuService {
   static getMenu(req, res) {
-    Menu.findAll({ include: [Caterer] })
-      .then(menu => res.status(200).json({
+    let currentMenu = null;
+    Menu.findAll({ where: { CatererId: req.params.chefId } }, { include: [Caterer] })
+      .then((menu) => {
+        //
+        currentMenu = menu;
+      })
+      .then(() => {
+        return populate(Meal, currentMenu[0].MenuItems, 'name,price,id');
+      })
+      // .then(items => console.log('Items", items))
+      .then(menuItems => res.status(200).json({
         status: 'successful',
-        menu: menu[0],
+        menu: currentMenu[0],
+        meals: menuItems,
       }))
       .catch(error => res.status(400).json({
         status: 'unsuccesful',
@@ -16,7 +28,7 @@ class menuService {
 
   static createAndSaveMenu(req, res) {
     Menu.create({
-      // chefId: req.caterer.id,
+      CatererId: req.caterer.id,
       MenuItems: req.body.MenuItems,
     }, {
       include: [{
@@ -35,9 +47,8 @@ class menuService {
 
   static editMenu(req, res) {
     Menu.update({
-      // chefId: req.user.id,
       MenuItems: req.body.MenuItems,
-    }, { where: { id: 1 } })
+    }, { where: { CatererId: req.caterer.id } })
       .then((menu) => {
         return res.status(200).json({
           status: 'successful',

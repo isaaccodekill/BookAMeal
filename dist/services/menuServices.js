@@ -9,6 +9,10 @@ var _menu = _interopRequireDefault(require("../models/menu"));
 
 var _caterer = _interopRequireDefault(require("../models/caterer"));
 
+var _meal = _interopRequireDefault(require("../models/meal"));
+
+var _populate = _interopRequireDefault(require("../Extras/populate"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -27,12 +31,25 @@ function () {
   _createClass(menuService, null, [{
     key: "getMenu",
     value: function getMenu(req, res) {
+      var currentMenu = null;
+
       _menu.default.findAll({
+        where: {
+          CatererId: req.params.chefId
+        }
+      }, {
         include: [_caterer.default]
       }).then(function (menu) {
+        //
+        currentMenu = menu;
+      }).then(function () {
+        return (0, _populate.default)(_meal.default, currentMenu[0].MenuItems, 'name,price,id');
+      }) // .then(items => console.log('Items", items))
+      .then(function (menuItems) {
         return res.status(200).json({
           status: 'successful',
-          menu: menu[0]
+          menu: currentMenu[0],
+          meals: menuItems
         });
       }).catch(function (error) {
         return res.status(400).json({
@@ -45,7 +62,7 @@ function () {
     key: "createAndSaveMenu",
     value: function createAndSaveMenu(req, res) {
       _menu.default.create({
-        // chefId: req.caterer.id,
+        CatererId: req.caterer.id,
         MenuItems: req.body.MenuItems
       }, {
         include: [{
@@ -67,11 +84,10 @@ function () {
     key: "editMenu",
     value: function editMenu(req, res) {
       _menu.default.update({
-        // chefId: req.user.id,
         MenuItems: req.body.MenuItems
       }, {
         where: {
-          id: 1
+          CatererId: req.caterer.id
         }
       }).then(function (menu) {
         return res.status(200).json({
